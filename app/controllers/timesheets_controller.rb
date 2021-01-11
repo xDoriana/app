@@ -5,6 +5,7 @@ class TimesheetsController < ApplicationController
     end
 
     def show
+        @timesheet = Timesheet.find(params[:id])
     end
 
     def new
