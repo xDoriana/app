@@ -1,1 +1,4 @@
-Budgets
+<h1>Budgets</h1>
+<% @budgets.each do |budget| %>
+    <p><%= budget.id %>, Employer: <%= budget.employer_id %>, Hours: <%= budget.hours %>, Start date: <%= budget.start_date %>, End date: <%= budget.end_date %></p>
+<% end %>

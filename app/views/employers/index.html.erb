@@ -1,1 +1,4 @@
-Employers
+<h1>Employers</h1>
+<% @employers.each do |employer| %>
+    <p><%= employer.first_name %> <%= employer.last_name %></p>
+<% end %>

@@ -1,1 +1,4 @@
-Employees
+<h1>Employees</h1>
+<% @employees.each do |employee| %>
+    <p><%= employee.first_name %> <%= employee.last_name %>, Employer: <%= employee.employer_id %></p>
+<% end %>

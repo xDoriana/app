@@ -1,1 +1,4 @@
-Timesheets
+<h1>Timesheets</h1>
+<% @timesheets.each do |timesheet| %>
+    <p><%= timesheet.id %>, Employee: <%= timesheet.employee_id %>, Budget: <%= timesheet.budget_id %>, Hours: <%= timesheet.hours %>, Date of service: <%= timesheet.date_of_service %></p>
+<% end %>
