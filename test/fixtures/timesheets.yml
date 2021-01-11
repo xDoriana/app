@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  hours: 1
+  date_of_service: 2021-01-11
+  employee: one
+  budget: one
+
+two:
+  hours: 1
+  date_of_service: 2021-01-11
+  employee: two
+  budget: two
