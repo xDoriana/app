@@ -1,2 +1,20 @@
 <h1>Employee</h1>
-<p><%= @employee.first_name %> <%= @employee.last_name %>, Employer: <%= @employee.employer_id %></p>
+
+<h3>ID</h3>
+<p><%= @employee.id %></p>
+
+<h3>Name</h3>
+<p><%= @employee.first_name %> <%= @employee.last_name %>
+
+<h3>Associated employer:</h3>
+<p>ID <%= @employer.id %>, <%= @employer.first_name %> <%= @employer.last_name %></p>
+
+<h3>Associated timesheets:</h3>
+<% @timesheets.each do |t| %>
+    <p><%= t.id %></p>
+<% end %>
+
+<h3>Associated budgets:</h3>
+<% @budgets.each do |b| %>
+    <p><%= b.id %></p>
+<% end %>

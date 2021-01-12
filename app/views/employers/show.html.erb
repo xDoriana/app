@@ -1,2 +1,17 @@
 <h1>Employer</h1>
+
+<h3>ID</h3>
+<p><%= @employer.id %></p>
+
+<h3>Name</h3>
 <p><%= @employer.first_name %> <%= @employer.last_name %></p>
+
+<h3>Associated employees:</h3>
+<% @employees.each do |e| %>
+    <p>ID <%= e.id %>, <%= e.first_name %> <%= e.last_name %></p>
+<% end %>
+
+<h3>Associated budgets:</h3>
+<% @budgets.each do |b| %>
+    <p>ID <%= b.id %></p>
+<% end %>

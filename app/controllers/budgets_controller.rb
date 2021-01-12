@@ -6,6 +6,9 @@ class BudgetsController < ApplicationController
 
     def show
         @budget = Budget.find(params[:id])
+        @employer = @budget.employer
+        @timesheets = @budget.timesheets
+        @employees = @budget.employees
     end
 
     def new

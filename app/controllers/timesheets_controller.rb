@@ -6,6 +6,8 @@ class TimesheetsController < ApplicationController
 
     def show
         @timesheet = Timesheet.find(params[:id])
+        @employee = @timesheet.employee
+        @employer = @employee.employer
     end
 
     def new

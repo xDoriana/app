@@ -1,2 +1,23 @@
-<h1>Budgets</h1>
-<p><%= @budget.id %>, Employer: <%= @budget.employer_id %>, Hours: <%= @budget.hours %>, Start date: <%= @budget.start_date %>, End date: <%= @budget.end_date %></p>
+<h1>Budget</h1>
+
+<h3>ID:</h3>
+<p><%= @budget.id %></p>
+
+<h3>Employer:</h3>
+<p>ID <%= @employer.id %>, <%= @employer.first_name %> <%= @employer.last_name %></p>
+
+<h3>Hours:</h3>
+<p><%= @budget.hours %></p>
+
+<h3>Start and end dates:</h3>
+<p>Start: <%= @budget.start_date %> --- End: <%= @budget.end_date %></p>
+
+<h3>Associated timesheets:</h3>
+<% @timesheets.each do |t| %>
+    <p>ID <%= t.id %></p>
+<% end %>
+
+<h3>Associated employees:</h3>
+<% @employees.each do |e| %>
+    <p>ID <%= e.id %>, <%= e.first_name %> <%= e.last_name %></p>
+<% end %>

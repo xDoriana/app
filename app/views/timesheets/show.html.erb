@@ -1,2 +1,21 @@
 <h1>Timesheet</h1>
-<p><%= @timesheet.id %>, Employee: <%= @timesheet.employee_id %>, Budget: <%= @timesheet.budget_id %>, Hours: <%= @timesheet.hours %>, Date of service: <%= @timesheet.date_of_service %></p>
+
+<h3>ID:</h3>
+<p><%= @timesheet.id %></p>
+
+<h3>Associated employee:</h3>
+<p>ID <%= @employee.id %>, <%= @employee.first_name %> <%= @employee.last_name %></p>
+
+<h3>Associated budget:</h3>
+<p><%= @timesheet.budget_id %></p>
+
+<h3>Associated employer:</h3>
+<p>ID <%= @employer.id %>, <%= @employer.first_name %> <%= @employer.last_name %></p>
+
+<h3>Hours:</h3>
+<p><%= @timesheet.hours %></p>
+
+<h3>Date of service:</h3>
+<p><%= @timesheet.date_of_service %></p>
+
+
