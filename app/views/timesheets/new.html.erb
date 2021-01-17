@@ -1,0 +1,17 @@
+<h1>Add a new Timesheet</h1>
+
+<%= form_for @timesheet do |f| %>
+    <%= f.label :employee_id %><br/ >
+    <%= f.select :employee_id, Employee.all.collect { |x| [x.first_name, x.last_name, x.id]}, {:include_blank => 'Select One'} %><br /><br />
+
+    <%= f.label :budget_id %><br/ >
+    <%= f.select :budget_id, Budget.all.collect { |x| [x.id]}, {:include_blank => 'Select One'} %><br /><br />
+
+    <%= f.label :hours %><br />
+    <%= f.number_field :hours%><br />
+
+    <%= f.label :date_of_service %><br />
+    <%= f.date_field :date_of_service%><br />
+
+    <%= f.submit "Submit" %>
+<% end %>
