@@ -49,6 +49,26 @@ class TimesheetsController < ApplicationController
     end
 
     def edit
+        @timesheet = Timesheet.find(params[:id])
+        @employee = @timesheet.employee
+        @budget = @timesheet.budget
+        @employer = @employee.employer
+    end
+
+    def update
+        @timesheet = Timesheet.find(params[:id])
+        @employee = @timesheet.employee
+        @budget = @timesheet.budget
+        @employer = @employee.employer
+
+        if @timesheet.update(timesheet_update_params)
+            flash[:success] = "Timesheet updated"
+            redirect_to timesheets_path
+        else
+            flash[:error] = "Timesheet was not updated"
+            render 'edit'
+            # respond_with(@timesheet)
+        end
     end
 
     def destroy
@@ -57,6 +77,10 @@ class TimesheetsController < ApplicationController
     private
     def timesheet_params
         params.require(:timesheet).permit(:employee_id, :budget_id, :hours, :date_of_service)
+    end
+
+    def timesheet_update_params
+        params.require(:timesheet).permit(:hours, :date_of_service)
     end
 
 end

@@ -1,0 +1,24 @@
+<h1>Edit Timesheet</h1>
+
+<h3>Employee:</h3>
+<p>ID <%= @employee.id %>, <%= @employee.first_name %> <%= @employee.last_name %></p>
+
+<h3>Budget:</h3>
+<p>ID <%= @budget.id %></p>
+
+<h3>Employer:</h3>
+<p>ID <%= @employer.id %>, <%= @employer.first_name %> <%= @employer.last_name %></p>
+
+<%= form_for @timesheet do |f| %>
+    <%= render 'shared/error_messages', object: f.object %>
+
+    <%= f.label :hours %><br />
+    <%= f.number_field :hours %><br />
+
+    <%= f.label :date_of_service %><br />
+    <%= f.date_field :date_of_service %><br />
+
+    <%= f.submit "Submit" %>
+    <%= link_to "Cancel", employees_path %>
+
+<% end %>
