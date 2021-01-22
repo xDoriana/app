@@ -1,6 +1,7 @@
 <h1>Add a new Employer</h1>
 
 <%= form_for @employer do |f| %>
+
     <%= f.label :first_name %><br />
     <%= f.text_field :first_name%><br />
 
@@ -8,4 +9,5 @@
     <%= f.text_field :last_name%><br />
 
     <%= f.submit "Submit" %>
+    
 <% end %>

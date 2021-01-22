@@ -25,6 +25,14 @@ class EmployersController < ApplicationController
     end
 
     def edit
+        @employer = Employer.find(params[:id])
+    end
+
+    def update
+        @employer = Employer.find(params[:id])
+        @employer.update(employer_params)
+        flash[:notice] = "Employer updated"
+        redirect_to employers_path
     end
 
     def destroy

@@ -1,6 +1,7 @@
 <h1>Add a new Employee</h1>
 
 <%= form_for @employee do |f| %>
+    
     <%= f.label :employer_id %><br/ >
     <%= f.select :employer_id, Employer.all.collect { |x| [x.first_name, x.last_name, x.id]}, {:include_blank => 'Select One'} %><br /><br />
 
@@ -11,4 +12,5 @@
     <%= f.text_field :last_name%><br />
 
     <%= f.submit "Submit" %>
+
 <% end %>

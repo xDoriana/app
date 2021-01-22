@@ -1,6 +1,7 @@
 <h1>Add a new Budget</h1>
 
 <%= form_for @budget do |f| %>
+
     <%= f.label :employer_id %><br/ >
     <%= f.select :employer_id, Employer.all.collect { |x| [x.first_name, x.last_name, x.id]}, {:include_blank => 'Select One'} %><br /><br />
 
@@ -14,4 +15,5 @@
     <%= f.date_field :end_date%><br />
 
     <%= f.submit "Submit" %>
+    
 <% end %>

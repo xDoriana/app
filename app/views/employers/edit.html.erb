@@ -1,0 +1,14 @@
+<h1>Edit Employer</h1>
+
+<%= form_for @employer do |f| %>
+
+    <%= f.label :first_name %><br/ >
+    <%= f.text_field :first_name %><br />
+
+    <%= f.label :last_name %><br/ >
+    <%= f.text_field :last_name %><br />
+
+    <%= f.submit "Submit" %>
+    <%= link_to "Cancel", employers_path %>
+    
+<% end %>

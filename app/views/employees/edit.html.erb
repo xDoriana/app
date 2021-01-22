@@ -1,0 +1,17 @@
+<h1>Edit Employee</h1>
+
+<%= form_for @employee do |f| %>
+
+    <%= f.label :employer_id %><br/ >
+    <%= f.select :employer_id, Employer.all.collect { |x| [x.first_name, x.last_name, x.id]}, {:include_blank => 'Select One'} %><br /><br />
+
+    <%= f.label :first_name %><br />
+    <%= f.text_field :first_name%><br />
+
+    <%= f.label :last_name %><br />
+    <%= f.text_field :last_name%><br />
+
+    <%= f.submit "Submit" %>
+    <%= link_to "Cancel", employees_path %>
+
+<% end %>
