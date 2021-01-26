@@ -1,6 +1,8 @@
 <h1>Add a new Timesheet</h1>
 
 <%= form_for @timesheet do |f| %>
+    <%= render 'shared/error_messages', object: f.object %>
+    
     <%= f.label :employee_id %><br/ >
     <%= f.select :employee_id, Employee.all.collect { |x| [x.first_name, x.last_name, x.id]}, {:include_blank => 'Select One'} %><br /><br />
 
