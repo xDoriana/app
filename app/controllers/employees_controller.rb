@@ -9,6 +9,7 @@ class EmployeesController < ApplicationController
         @employer = @employee.employer
         @timesheets = @employee.timesheets
         @budgets = @employee.budgets
+        @first_budget = @budgets.order(:id).first
     end
 
     def new
@@ -19,23 +20,30 @@ class EmployeesController < ApplicationController
     def create
         @employee = Employee.new(employee_params)
         if @employee.save
-            flash[:notice] = "Employee created"
+            flash[:success] = "Employee created"
             redirect_to employees_path
         else
+            flash[:error] = "Employee was not created"
             render 'new'
         end
     end
 
     def edit
         @employee = Employee.find(params[:id])
-        @employer = Employer.new
+        @employer = @employee.employer
     end
 
     def update
         @employee = Employee.find(params[:id])
-        @employee.update(employee_params)
-        flash[:notice] = "Employee updated"
-        redirect_to employees_path
+        @employer = @employee.employer
+
+        if @employee.update(employee_update_params)
+            flash[:success] = "Employee updated"
+            redirect_to employees_path
+        else
+            flash[:error] = "Employee was not updated"
+            render 'edit'
+        end
     end
 
     def destroy
@@ -44,6 +52,10 @@ class EmployeesController < ApplicationController
     private
     def employee_params
         params.require(:employee).permit(:employer_id, :first_name, :last_name)
+    end
+
+    def employee_update_params
+        params.require(:employee).permit(:first_name, :last_name)
     end
     
 end

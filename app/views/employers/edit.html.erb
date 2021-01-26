@@ -1,6 +1,9 @@
 <h1>Edit Employer</h1>
 
+<p>ID <%= @employer.id %>, <%= @employer.first_name %> <%= @employer.last_name %></p>
+
 <%= form_for @employer do |f| %>
+    <%= render 'shared/error_messages', object: f.object %>
 
     <%= f.label :first_name %><br/ >
     <%= f.text_field :first_name %><br />

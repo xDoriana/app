@@ -15,6 +15,9 @@
 <% end %>
 
 <h3>Associated budgets:</h3>
-<% @budgets.each do |b| %>
-    <p><%= b.id %></p>
-<% end %>
+<p><%= @first_budget.id %></p>
+    <% @budgets.each do |b| %>
+        <% if b.id != @first_budget.id %>
+            <p><%= b.id %></p>
+        <% end %>
+    <% end %>

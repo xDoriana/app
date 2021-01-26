@@ -17,9 +17,10 @@ class EmployersController < ApplicationController
     def create
         @employer = Employer.new(employer_params)
         if @employer.save
-            flash[:notice] = "Employer created"
+            flash[:success] = "Employer created"
             redirect_to employers_path
         else
+            flash[:error] = "Employer was not created"
             render 'new'
         end
     end
@@ -30,9 +31,13 @@ class EmployersController < ApplicationController
 
     def update
         @employer = Employer.find(params[:id])
-        @employer.update(employer_params)
-        flash[:notice] = "Employer updated"
-        redirect_to employers_path
+        if @employer.update(employer_params)
+            flash[:success] = "Employer updated"
+            redirect_to employers_path
+        else
+            flash[:error] = "Employer was not updated"
+            render 'edit'
+        end
     end
 
     def destroy

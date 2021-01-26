@@ -13,6 +13,7 @@ class BudgetsController < ApplicationController
         @oldest_timesheet = @timesheets.order(:date_of_service).first
         @most_recent_timesheet = @timesheets.order(:date_of_service).last
         @first_employee = @employees.order(:id).first
+# fa sa fie chestia asta mai optimizata
     end
 
     def new
@@ -23,10 +24,10 @@ class BudgetsController < ApplicationController
     def create
         @budget = Budget.new(budget_params)
         if @budget.save
-            flash[:notice] = "Budget created"
+            flash[:success] = "Budget created"
             redirect_to budgets_path
         else
-            flash[:warning] = "Budget was not created"
+            flash[:error] = "Budget was not created"
             render 'new'
         end
     end

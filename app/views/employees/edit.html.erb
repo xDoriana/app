@@ -1,9 +1,10 @@
 <h1>Edit Employee</h1>
 
-<%= form_for @employee do |f| %>
+<h3>Employer:</h3>
+<p>ID <%= @employer.id %>, <%= @employer.first_name %> <%= @employer.last_name %></p>
 
-    <%= f.label :employer_id %><br/ >
-    <%= f.select :employer_id, Employer.all.collect { |x| [x.first_name, x.last_name, x.id]}, {:include_blank => 'Select One'} %><br /><br />
+<%= form_for @employee do |f| %>
+    <%= render 'shared/error_messages', object: f.object %>
 
     <%= f.label :first_name %><br />
     <%= f.text_field :first_name%><br />

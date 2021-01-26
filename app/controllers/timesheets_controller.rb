@@ -19,10 +19,10 @@ class TimesheetsController < ApplicationController
     def create
         @timesheet = Timesheet.new(timesheet_params)
         if @timesheet.save
-            flash[:notice] = "Timesheet created"
+            flash[:success] = "Timesheet created"
             redirect_to timesheets_path
         else
-            flash[:warning] = "Timesheet was not created"
+            flash[:error] = "Timesheet was not created"
             render 'new'
         end
     end
