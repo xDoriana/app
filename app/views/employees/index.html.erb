@@ -1,4 +1,5 @@
 <h1>Employees</h1>
 <% @employees.each do |employee| %>
-    <p><%= employee.first_name %> <%= employee.last_name %>, Employer: <%= employee.employer_id %></p>
+    <p><%= employee.first_name %> <%= employee.last_name %> - <%= link_to "View", employee_path(employee.id) %> | <%= link_to "Edit", edit_employee_path(employee.id) %><br />
+    Employer: ID <%= employee.employer_id %></p>
 <% end %>
