@@ -13,20 +13,32 @@
 <p>Start: <%= @budget.start_date %> --- End: <%= @budget.end_date %></p>
 
 <h3>Timesheet dates range:</h3>
-<p>Start: <%= @oldest_timesheet.date_of_service %> --- End: <%= @most_recent_timesheet.date_of_service %></p>
+<% if @budget.has_assoc_timesheets? %>
+    <p>Start: <%= @oldest_timesheet.date_of_service %> --- End: <%= @most_recent_timesheet.date_of_service %></p>
+<% else %>
+    <p>Budget does not have associated timesheets</p>
+<% end %>
 
 <h3>Associated timesheets:</h3>
-<% @timesheets.each do |t| %>
-    <p>ID <%= t.id %></p>
+<% if @budget.has_assoc_timesheets? %>
+    <% @timesheets.each do |t| %>
+        <p>ID <%= t.id %></p>
+    <% end %>
+<% else %>
+    <p>Budget does not have associated timesheets</p>
 <% end %>
 
 <h3>Timesheet total hours:</h3>
 <p><%= @associated_timesheet_hours %></p>
 
 <h3>Associated employees:</h3>
-<p>ID <%= @first_employee.id %>, <%= @first_employee.first_name %> <%= @first_employee.last_name %></p>
-    <% @employees.each do |e| %>
-        <% if e.id != @first_employee.id %>
-            <p>ID <%= e.id %>, <%= e.first_name %> <%= e.last_name %></p>
+<% if @budget.has_assoc_timesheets? %>
+    <p>ID <%= @first_employee.id %>, <%= @first_employee.first_name %> <%= @first_employee.last_name %></p>
+        <% @employees.each do |e| %>
+            <% if e.id != @first_employee.id %>
+                <p>ID <%= e.id %>, <%= e.first_name %> <%= e.last_name %></p>
+            <% end %>
         <% end %>
-    <% end %>
+<% else %>
+    <p>Budget does not have associated employees</p>
+<% end %>

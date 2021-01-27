@@ -38,4 +38,9 @@ class Budget < ApplicationRecord
     end
   end
 
+  def has_assoc_timesheets?
+    Budget.includes(:timesheets).where(timesheets: {budget_id: id}).any?
+# cum as putea face aici pt employees folosind direct asocierea cu employees?
+  end
+
 end

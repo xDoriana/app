@@ -10,14 +10,23 @@
 <p>ID <%= @employer.id %>, <%= @employer.first_name %> <%= @employer.last_name %></p>
 
 <h3>Associated timesheets:</h3>
-<% @timesheets.each do |t| %>
-    <p><%= t.id %></p>
+<% if @employee.has_assoc_timesheets? %>
+    <% @timesheets.each do |t| %>
+        <p><%= t.id %></p>
+    <% end %>
+<% else %>
+    <p>Employee does not have associated timesheets</p>
 <% end %>
 
 <h3>Associated budgets:</h3>
-<p><%= @first_budget.id %></p>
+<% if @employee.has_assoc_timesheets? %>
+    <p><%= @first_budget.id %></p>
     <% @budgets.each do |b| %>
         <% if b.id != @first_budget.id %>
             <p><%= b.id %></p>
         <% end %>
     <% end %>
+<% else %>
+    <p>Employee does not have associated budgets</p>
+<% end %>
+
