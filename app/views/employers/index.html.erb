@@ -1,4 +1,11 @@
 <h1>Employers</h1>
+
 <% @employers.each do |employer| %>
-    <p><%= employer.first_name %> <%= employer.last_name %> - <%= link_to "View", employer_path(employer.id) %> | <%= link_to "Edit", edit_employer_path(employer.id) %></p>
+    <p>ID: <%= employer.id %>, <%= employer.first_name %> <%= employer.last_name %><br />
+    <%= link_to "View", employer_path(employer.id) %> | <%= link_to "Edit", edit_employer_path(employer.id) %> | <%= link_to "Delete", employer, method: :delete, data: { confirm: "This action will delete the employer and any associated records" }%></p>
+    <p></p>
 <% end %>
+
+<br />
+<h4> Create new Employer:</h4>
+<%= link_to "Create new", new_employer_path, class: "btn btn-primary" %>

@@ -18,4 +18,7 @@
 <h3>Date of service:</h3>
 <p><%= @timesheet.date_of_service %></p>
 
+<br />
+<%= link_to "Delete", @timesheet, method: :delete, data: { confirm: "You sure?" }, class: "btn btn-primary" %>
+<!-- aici in loc de @timesheet as putea pune destroy_timesheet_path(@timesheet)? care ii diferenta??? -->
 

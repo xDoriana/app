@@ -52,6 +52,9 @@ class BudgetsController < ApplicationController
     end
 
     def destroy
+        @budget = Budget.find(params[:id]).destroy
+        flash[:success] = "Budget and any associated timesheets were deleted"
+        redirect_to budgets_path
     end
 
     private

@@ -1,4 +1,12 @@
 <h1>Timesheets</h1>
+
 <% @timesheets.each do |timesheet| %>
-    <p><%= timesheet.id %>, Employee: <%= timesheet.employee_id %>, Budget: <%= timesheet.budget_id %>, Hours: <%= timesheet.hours %>, Date of service: <%= timesheet.date_of_service %></p>
+    <p>ID: <%= timesheet.id %>, Employee: <%= timesheet.employee_id %>, Budget: <%= timesheet.budget_id %>, Hours: <%= timesheet.hours %>, Date of service: <%= timesheet.date_of_service %><br />
+    <%= link_to "View", timesheet_path(timesheet.id) %> | <%= link_to "Edit", edit_timesheet_path(timesheet.id) %> | <%= link_to "Delete", timesheet, method: :delete, data: { confirm: "You sure?" }%></p>
+<!-- aici in loc de timesheet as putea pune destroy_timesheet_path(timesheet)? care ii diferenta??? -->
+    <p></p>
 <% end %>
+
+<br />
+<h4> Create new Timesheet:</h4>
+<%= link_to "Create new", new_timesheet_path, class: "btn btn-primary" %>

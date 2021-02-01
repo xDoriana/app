@@ -47,6 +47,9 @@ class EmployeesController < ApplicationController
     end
 
     def destroy
+        @employee = Employee.find(params[:id]).destroy
+        flash[:success] = "Employee and any associated timesheets were deleted"
+        redirect_to employees_path
     end
 
     private

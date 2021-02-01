@@ -51,7 +51,11 @@ class TimesheetsController < ApplicationController
     end
 
     def destroy
+        @timesheet = Timesheet.find(params[:id]).destroy
+        flash[:success] = "Timesheet deleted"
+        redirect_to timesheets_path
     end
+
     
     private
     def timesheet_params

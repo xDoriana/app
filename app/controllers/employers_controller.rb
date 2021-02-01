@@ -41,6 +41,9 @@ class EmployersController < ApplicationController
     end
 
     def destroy
+        @employer = Employer.find(params[:id]).destroy
+        flash[:success] = "Employer and any associated records were deleted"
+        redirect_to employers_path
     end
     
 

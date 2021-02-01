@@ -1,9 +1,9 @@
 class Budget < ApplicationRecord
   belongs_to :employer
-  has_many :timesheets
+  has_many :timesheets, dependent: :destroy
   has_many :employees, through: :timesheets
 
-  validate :associated_timesheets_dates
+  validate :associated_timesheets_dates, on: :edit
   validate :hours_cover_timesheets_hours
   validate :start_date_is_before_end_date
   validates :hours, presence: true, numericality: { greater_than: 0 }

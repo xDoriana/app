@@ -42,3 +42,6 @@
 <% else %>
     <p>Budget does not have associated employees</p>
 <% end %>
+
+<br />
+<%= link_to "Delete", @budget, method: :delete, data: { confirm: "This action will delete the budget and any associated timesheets" }, class: "btn btn-primary" %>
