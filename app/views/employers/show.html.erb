@@ -27,12 +27,49 @@
 
 <br />
 <br />
-<h3>Budgets total hours</h3>
-<h3>Budgets total date range</h3>
-<h3>Timesheets total hours from budgets total hours</h3>
-<p>percentage of submitted hours from total hours</p>
+<h3>Associated budgets' total hours</h3>
+<% if @employer.has_assoc_budgets? %>
+    <p><%= @employer.total_budgets_hours %></p>
+<% else %>
+    <p>Employer does not have associated budgets</p>
+<% end %>
 
-<h3>Total occupied timesheet days from budgets date range</h3>
+<h3>Associated budgets' total date range</h3>
+<% if @employer.has_assoc_budgets? %>
+    <p>Start date: <%= @employer.assoc_budgets_start_date %> -- End date: <%= @employer.assoc_budgets_end_date %></p>
+<% else %>
+    <p>Employer does not have associated budgets</p>
+<% end %>
+
+<h3>Associated timesheets total hours from budgets total hours</h3>
+<% if @employer.has_assoc_budgets? %>
+    <p><%= @employer.timesheet_hours_from_budgets %></p>
+    <p>Hours usage rate: <%= @employer.timesheet_hours_percentage_from_budgets %>%</p>
+<% else %>
+    <p>Employer does not have associated budgets</p>
+<% end %>
+
+<h3>Associated budgets' total number of days</h3>
+<% if @employer.has_assoc_budgets? %>
+    <p><%= @employer.budgets_total_days %></p>
+<% else %>
+    <p>Employer does not have associated budgets</p>
+<% end %>
+
+<h3>Associated budgets' total number of timesheets</h3>
+<% if @employer.has_assoc_budgets? %>
+    <p><%= @employer.budgets_total_timesheets_number %></p>
+<% else %>
+    <p>Employer does not have associated budgets</p>
+<% end %>
+
+
+<h3>Usage rate of budget days</h3>
+<% if @employer.has_assoc_budgets? %>
+    <p><%= @employer.days_usage_percentage %>%</p>
+<% else %>
+    <p>Employer does not have associated budgets</p>
+<% end %>
 
 <!-- apoi, ca idee, poti sa ai un fel de vizualizare statistica impartita de ex in calupuri pe bugete sau pe employees -->
 

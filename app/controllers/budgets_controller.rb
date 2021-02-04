@@ -15,7 +15,7 @@ class BudgetsController < ApplicationController
         @oldest_timesheet = @timesheets.order(:date_of_service).first
         @most_recent_timesheet = @timesheets.order(:date_of_service).last
         @first_employee = @employees.order(:id).first
-# fa sa fie chestia asta mai optimizata
+# fa sa fie chestia asta mai optimizata, uita-te cum am facut la employer.rb
     end
 
     def new

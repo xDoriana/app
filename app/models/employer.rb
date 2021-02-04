@@ -14,4 +14,53 @@ class Employer < ApplicationRecord
         Employer.includes(:employees).where(employees: {employer_id: id}).any?
 # cum as putea face aici pt timesheets folosind direct asocierea cu timesheets (has many timesheets through budget)?
     end
+
+    def total_budgets_hours
+        budgets.sum(&:hours)
+    end
+
+    def timesheet_hours_from_budgets
+        total_hours = 0
+        budgets.each do |budget|
+            total_hours += budget.timesheets.sum(&:hours)
+        end
+        return total_hours
+    end
+
+    def timesheet_hours_percentage_from_budgets
+        timesheet_hours_from_budgets.to_f / total_budgets_hours.to_f * 100.0
+    end
+
+    def assoc_budgets_start_date
+        budget = budgets.order(:start_date).first
+        return budget.start_date
+    end
+
+    def assoc_budgets_end_date
+        budget = budgets.order(:end_date).last
+        return budget.end_date
+    end
+
+    def budgets_total_days
+        total_days = 0
+        budgets.each do |budget|
+            total_days += (budget.end_date - budget.start_date).to_i
+# nu-s sigura ca chestia asta takes into account DST
+        end
+        return total_days
+    end
+
+    def budgets_total_timesheets_number
+        total_timesheets = 0
+        budgets.each do |budget|
+            total_timesheets += budget.timesheets.count
+        end
+        return total_timesheets
+    end
+
+    def days_usage_percentage
+        (budgets_total_timesheets_number.to_f / budgets_total_days.to_f * 100.0).round(2)
+    end
+
+
 end
