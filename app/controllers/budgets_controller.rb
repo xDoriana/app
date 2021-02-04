@@ -1,5 +1,7 @@
 class BudgetsController < ApplicationController
 
+    before_action :logged_in_user
+
     def index
         @budgets = Budget.all
     end

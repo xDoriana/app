@@ -5,3 +5,5 @@
 
 <h3>E-mail</h3>
 <p><%= @user.email %></p>
+
+<%= link_to "Delete user", @user, method: :delete, data: { confirm: "You sure?" }, class: "btn btn-primary" %>

@@ -1,5 +1,7 @@
 class EmployersController < ApplicationController
 
+    before_action :logged_in_user
+
     def index
         @employers = Employer.all
     end

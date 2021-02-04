@@ -1,5 +1,7 @@
 class TimesheetsController < ApplicationController
 
+    before_action :logged_in_user
+
     def index
         @timesheets = Timesheet.all
     end
