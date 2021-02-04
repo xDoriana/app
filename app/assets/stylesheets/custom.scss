@@ -3,9 +3,16 @@
 
 /* mixins, variables, etc. */
 $gray-medium-light: #eaeaea;
+@mixin box_sizing {
+  -moz-box-sizing:    border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing:         border-box;
+}
+
 /* universal */
 body {
-  padding-top: 60px;
+  padding-top: 100px;
+  padding-bottom: 100px;
 }
 section {
   overflow: auto;
@@ -42,6 +49,7 @@ p {
   line-height: 1.7em;
 }
 /* header */
+/* baga un logo la meniu sau sterge clasa asta */
 #logo {
   float: left;
   margin-right: 10px;
@@ -54,5 +62,29 @@ p {
   &:hover {
     color: white;
     text-decoration: none;
+  }
+}
+
+/* forms */
+input, textarea, select, .uneditable-input {
+  border: 1px solid #bbb;
+  width: 100%;
+  margin-bottom: 15px;
+  @include box_sizing;
+}
+input {
+  height: auto !important;
+}
+#error_explanation {
+  color: red;
+  ul {
+    color: red;
+    margin: 0 0 30px 0;
+  }
+}
+.field_with_errors {
+  @extend .has-error;
+  .form-control {
+    color: $state-danger-text;
   }
 }

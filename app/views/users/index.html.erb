@@ -2,4 +2,8 @@
 
 <h1>Welcome to the Timesheet App!</h1>
 
-<h2>Please <%= link_to "Log in", login_path %> to start using the application!</h2>
+<% if logged_in? %>
+    <h2>Have a productive session!</h2>
+<% else %>
+    <h2>Please <%= link_to "Log in", login_path %> to start using the application!</h2>
+<% end %>

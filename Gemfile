@@ -7,6 +7,7 @@ ruby '2.6.6'
 gem 'rails', '~> 6.0.3', '>= 6.0.3.4'
 
 gem 'bootstrap-sass'
+gem 'rails-controller-testing'
 
 # Use Puma as the app server
 gem 'puma', '~> 4.1'
