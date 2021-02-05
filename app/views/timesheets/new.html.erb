@@ -1,19 +1,30 @@
+<% provide(:title, "Add Timesheet") %>
+
 <h1>Add a new Timesheet</h1>
 
-<%= form_for @timesheet do |f| %>
-    <%= render 'shared/error_messages', object: f.object %>
+<div class="row">
+    <div class="col-md-6 col-md-offset-3">
+
+        <%= form_for @timesheet do |f| %>
+            
+            <%= render 'shared/error_messages', object: f.object %>
+            
+            <%= f.label :employee_id %>
+            <%= f.select :employee_id, Employee.all.collect { |x| [x.first_name, x.last_name, x.id]}, {:include_blank => 'Select One'}, class: 'form-control' %>
+
+            <%= f.label :budget_id %>
+            <%= f.select :budget_id, Budget.all.collect { |x| [x.id]}, {:include_blank => 'Select One'}, class: 'form-control' %>
+
+            <%= f.label :hours %>
+            <%= f.number_field :hours, class: 'form-control' %>
+
+            <%= f.label :date_of_service %>
+            <%= f.date_field :date_of_service, class: 'form-control' %>
+
+            <%= f.submit "Submit", class: "btn btn-primary btn-lg btn-block" %>
+            <%= link_to "Cancel", timesheets_path, class: "btn btn-info btn-block" %>
+            
+        <% end %>
     
-    <%= f.label :employee_id %><br/ >
-    <%= f.select :employee_id, Employee.all.collect { |x| [x.first_name, x.last_name, x.id]}, {:include_blank => 'Select One'} %><br /><br />
-
-    <%= f.label :budget_id %><br/ >
-    <%= f.select :budget_id, Budget.all.collect { |x| [x.id]}, {:include_blank => 'Select One'} %><br /><br />
-
-    <%= f.label :hours %><br />
-    <%= f.number_field :hours%><br />
-
-    <%= f.label :date_of_service %><br />
-    <%= f.date_field :date_of_service%><br />
-
-    <%= f.submit "Submit" %>
-<% end %>
+    </div>
+</div>

@@ -1,13 +1,24 @@
+<% provide(:title, "Add Employer") %>
+
 <h1>Add a new Employer</h1>
 
-<%= form_for @employer do |f| %>
+<div class="row">
+    <div class="col-md-6 col-md-offset-3">
 
-    <%= f.label :first_name %><br />
-    <%= f.text_field :first_name%><br />
+        <%= form_for @employer do |f| %>
 
-    <%= f.label :last_name %><br />
-    <%= f.text_field :last_name%><br />
+            <%= render 'shared/error_messages', object: f.object %>
 
-    <%= f.submit "Submit" %>
-    
-<% end %>
+            <%= f.label :first_name %>
+            <%= f.text_field :first_name, class: 'form-control' %>
+
+            <%= f.label :last_name %>
+            <%= f.text_field :last_name, class: 'form-control' %>
+
+            <%= f.submit "Submit", class: "btn btn-primary btn-lg btn-block" %>
+            <%= link_to "Cancel", employers_path, class: "btn btn-info btn-block" %>
+            
+        <% end %>
+
+    </div>
+</div>

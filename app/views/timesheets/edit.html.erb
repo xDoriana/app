@@ -1,27 +1,36 @@
+<% provide(:title, "Edit Timesheet") %>
+
 <h1>Edit Timesheet</h1>
 
-<h3>ID:</h3>
-<p><%= @timesheet.id %></p>
+<div class="row">
+    <div class="col-md-6 col-md-offset-3">
 
-<h3>Employee:</h3>
-<p>ID <%= @employee.id %>, <%= @employee.first_name %> <%= @employee.last_name %></p>
+        <strong>ID: </strong><%= @timesheet.id %>
+        <br></br>
 
-<h3>Budget:</h3>
-<p>ID <%= @budget.id %></p>
+        <strong>Employer: </strong>ID <%= @employee.id %>, <%= @employee.first_name %> <%= @employee.last_name %>
+        <br></br>
 
-<h3>Employer:</h3>
-<p>ID <%= @employer.id %>, <%= @employer.first_name %> <%= @employer.last_name %></p>
+        <strong>Budget: </strong>ID <%= @budget.id %>
+        <br></br>
 
-<%= form_for @timesheet do |f| %>
-    <%= render 'shared/error_messages', object: f.object %>
+        <strong>Employer: </strong>ID <%= @employer.id %>, <%= @employer.first_name %> <%= @employer.last_name %>
+        <br></br>
 
-    <%= f.label :hours %><br />
-    <%= f.number_field :hours %><br />
+        <%= form_for @timesheet do |f| %>
 
-    <%= f.label :date_of_service %><br />
-    <%= f.date_field :date_of_service %><br />
+            <%= render 'shared/error_messages', object: f.object %>
 
-    <%= f.submit "Submit" %>
-    <%= link_to "Cancel", employees_path %>
+            <%= f.label :hours %>
+            <%= f.number_field :hours, class: 'form-control' %>
 
-<% end %>
+            <%= f.label :date_of_service %>
+            <%= f.date_field :date_of_service, class: 'form-control' %>
+
+            <%= f.submit "Save changes", class: "btn btn-primary btn-lg btn-block" %>
+            <%= link_to "Cancel", timesheet_path, class: "btn btn-info btn-block" %>
+
+        <% end %>
+
+    </div>
+</div>

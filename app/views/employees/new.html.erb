@@ -1,16 +1,27 @@
+<% provide(:title, "Add Employee") %>
+
 <h1>Add a new Employee</h1>
 
-<%= form_for @employee do |f| %>
-    
-    <%= f.label :employer_id %><br/ >
-    <%= f.select :employer_id, Employer.all.collect { |x| [x.first_name, x.last_name, x.id]}, {:include_blank => 'Select One'} %><br /><br />
+<div class="row">
+    <div class="col-md-6 col-md-offset-3">
 
-    <%= f.label :first_name %><br />
-    <%= f.text_field :first_name%><br />
+        <%= form_for @employee do |f| %>
 
-    <%= f.label :last_name %><br />
-    <%= f.text_field :last_name%><br />
+            <%= render 'shared/error_messages', object: f.object %>
+            
+            <%= f.label :employer_id %>
+            <%= f.select :employer_id, Employer.all.collect { |x| [x.first_name, x.last_name, x.id]}, {:include_blank => 'Select One'}, class: 'form-control' %>
 
-    <%= f.submit "Submit" %>
+            <%= f.label :first_name %>
+            <%= f.text_field :first_name, class: 'form-control' %>
 
-<% end %>
+            <%= f.label :last_name %>
+            <%= f.text_field :last_name, class: 'form-control' %>
+
+            <%= f.submit "Submit", class: "btn btn-primary btn-lg btn-block" %>
+            <%= link_to "Cancel", employees_path, class: "btn btn-info btn-block" %>
+
+        <% end %>
+
+    </div>
+</div>

@@ -1,21 +1,30 @@
+<% provide(:title, "Edit Employee") %>
+
 <h1>Edit Employee</h1>
 
-<h3>ID:</h3>
-<p><%= @employee.id %></p>
+<div class="row">
+    <div class="col-md-6 col-md-offset-3">
 
-<h3>Employer:</h3>
-<p>ID <%= @employer.id %>, <%= @employer.first_name %> <%= @employer.last_name %></p>
+        <strong>ID: </strong><%= @employee.id %>
+        <br></br>
 
-<%= form_for @employee do |f| %>
-    <%= render 'shared/error_messages', object: f.object %>
+        <strong>Employer: </strong>ID <%= @employer.id %>, <%= @employer.first_name %> <%= @employer.last_name %>
+        <br></br>
 
-    <%= f.label :first_name %><br />
-    <%= f.text_field :first_name%><br />
+        <%= form_for @employee do |f| %>
+            
+            <%= render 'shared/error_messages', object: f.object %>
 
-    <%= f.label :last_name %><br />
-    <%= f.text_field :last_name%><br />
+            <%= f.label :first_name %>
+            <%= f.text_field :first_name, class: 'form-control' %>
 
-    <%= f.submit "Submit" %>
-    <%= link_to "Cancel", employees_path %>
+            <%= f.label :last_name %>
+            <%= f.text_field :last_name, class: 'form-control' %>
 
-<% end %>
+            <%= f.submit "Save changes", class: "btn btn-primary btn-lg btn-block" %>
+            <%= link_to "Cancel", employee_path, class: "btn btn-info btn-block" %>
+
+        <% end %>
+
+    </div>
+</div>

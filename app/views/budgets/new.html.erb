@@ -1,19 +1,30 @@
+<% provide(:title, "Add Budget") %>
+
 <h1>Add a new Budget</h1>
 
-<%= form_for @budget do |f| %>
+<div class="row">
+    <div class="col-md-6 col-md-offset-3">
 
-    <%= f.label :employer_id %><br/ >
-    <%= f.select :employer_id, Employer.all.collect { |x| [x.first_name, x.last_name, x.id]}, {:include_blank => 'Select One'} %><br /><br />
+        <%= form_for @budget do |f| %>
 
-    <%= f.label :hours %><br />
-    <%= f.number_field :hours%><br />
+            <%= render 'shared/error_messages', object: f.object %>
 
-    <%= f.label :start_date %><br />
-    <%= f.date_field :start_date%><br />
+            <%= f.label :employer_id %>
+            <%= f.select :employer_id, Employer.all.collect { |x| [x.first_name, x.last_name, x.id]}, {:include_blank => 'Select One'}, class: 'form-control' %>
 
-    <%= f.label :end_date %><br />
-    <%= f.date_field :end_date%><br />
+            <%= f.label :hours %>
+            <%= f.number_field :hours, class: 'form-control'%>
 
-    <%= f.submit "Submit" %>
-    
-<% end %>
+            <%= f.label :start_date %>
+            <%= f.date_field :start_date, class: 'form-control'%>
+
+            <%= f.label :end_date %>
+            <%= f.date_field :end_date, class: 'form-control'%>
+
+            <%= f.submit "Submit", class: "btn btn-primary btn-lg btn-block" %>
+            <%= link_to "Cancel", budgets_path, class: "btn btn-info btn-block" %>
+            
+        <% end %>
+
+    </div>
+</div>
