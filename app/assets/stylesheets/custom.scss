@@ -11,7 +11,7 @@ $gray-medium-light: #eaeaea;
 
 /* universal */
 body {
-  padding-top: 100px;
+  padding-top: 60px;
   padding-bottom: 100px;
 }
 section {
@@ -33,6 +33,7 @@ h1, h2, h3, h4, h5, h6 {
 h1 {
   font-size: 3em;
   letter-spacing: -2px;
+  margin-top: 50px;
   margin-bottom: 30px;
   text-align: center;
 }
