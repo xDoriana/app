@@ -1,7 +1,15 @@
 require 'test_helper'
 
 class TimesheetTest < ActiveSupport::TestCase
-  # test "the truth" do
-  #   assert true
-  # end
+
+  def setup
+    @employee = employees(:one)
+    @budget = budgets(:one)
+    @timesheet = timesheets(:one)
+  end
+
+  test "should be valid" do
+    assert @timesheet.valid?
+  end
+
 end

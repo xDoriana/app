@@ -2,14 +2,16 @@ class Timesheet < ApplicationRecord
   belongs_to :employee
   belongs_to :budget
 
+  validates :hours, :employee_id, :budget_id, presence: true, numericality: { only_integer: true, greater_than: 0 }
+  validates :date_of_service, presence: true
+
   validate :employee_belongs_to_employer
   validate :hours_fit_in_a_day
-
 
   validate :hours_are_within_budget_hours
   validate :hours_are_within_budget_hours_left
   validate :date_is_in_budget_date_range
-  validates :hours, presence: true, numericality: { greater_than: 0 }
+
 
   # orele la timesheet sa nu depaseasca orele din buget + orele de la celelalte submitted timesheets
 

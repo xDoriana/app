@@ -11,9 +11,6 @@ class BudgetsController < ApplicationController
         @employer = @budget.employer
         @timesheets = @budget.timesheets
         @employees = @budget.employees
-        @associated_timesheet_hours = @budget.associated_timesheets_hours
-        @oldest_timesheet = @timesheets.order(:date_of_service).first
-        @most_recent_timesheet = @timesheets.order(:date_of_service).last
         @first_employee = @employees.order(:id).first
 # fa sa fie chestia asta mai optimizata, uita-te cum am facut la employer.rb
     end
@@ -29,7 +26,7 @@ class BudgetsController < ApplicationController
             flash[:success] = "Budget created"
             redirect_to budgets_path
         else
-            flash[:error] = "Budget was not created"
+            flash[:danger] = "Budget was not created"
             render 'new'
         end
     end
@@ -41,13 +38,13 @@ class BudgetsController < ApplicationController
 
     def update
         @budget = Budget.find(params[:id])
-        @employer = @budget.employer        
+        @employer = @budget.employer
 
         if @budget.update(budget_update_params)
             flash[:success] = "Budget updated"
             redirect_to budgets_path
         else
-            flash[:error] = "Budget was not updated"
+            flash.now[:danger] = "Budget was not updated"
             render 'edit'
             # respond_with(@budget)
         end
@@ -55,7 +52,7 @@ class BudgetsController < ApplicationController
 
     def destroy
         @budget = Budget.find(params[:id]).destroy
-        flash[:success] = "Budget and any associated timesheets were deleted"
+        flash.now[:success] = "Budget and any associated timesheets were deleted"
         redirect_to budgets_path
     end
 

@@ -1,47 +1,55 @@
 <h1>Budget</h1>
 
 <h3>ID:</h3>
-<p><%= @budget.id %></p>
+    <p><%= @budget.id %></p>
 
 <h3>Employer:</h3>
-<p>ID <%= @employer.id %>, <%= @employer.first_name %> <%= @employer.last_name %></p>
+    <p>ID <%= @employer.id %>, <%= @employer.first_name %> <%= @employer.last_name %></p>
 
 <h3>Hours:</h3>
-<p><%= @budget.hours %></p>
-
-<h3>Start and end dates:</h3>
-<p>Start: <%= @budget.start_date %> --- End: <%= @budget.end_date %></p>
-
-<h3>Timesheet dates range:</h3>
-<% if @budget.has_assoc_timesheets? %>
-    <p>Start: <%= @oldest_timesheet.date_of_service %> --- End: <%= @most_recent_timesheet.date_of_service %></p>
-<% else %>
-    <p>Budget does not have associated timesheets</p>
-<% end %>
+    <p><%= @budget.hours %></p>
 
 <h3>Associated timesheets:</h3>
-<% if @budget.has_assoc_timesheets? %>
-    <% @timesheets.each do |t| %>
-        <p>ID <%= t.id %></p>
-    <% end %>
-<% else %>
-    <p>Budget does not have associated timesheets</p>
-<% end %>
-
-<h3>Timesheet total hours:</h3>
-<p><%= @associated_timesheet_hours %></p>
-
-<h3>Associated employees:</h3>
-<% if @budget.has_assoc_timesheets? %>
-    <p>ID <%= @first_employee.id %>, <%= @first_employee.first_name %> <%= @first_employee.last_name %></p>
-        <% @employees.each do |e| %>
-            <% if e.id != @first_employee.id %>
-                <p>ID <%= e.id %>, <%= e.first_name %> <%= e.last_name %></p>
-            <% end %>
+    <% if @budget.has_assoc_timesheets? %>
+        <% @timesheets.each do |t| %>
+            <p>ID <%= t.id %></p>
         <% end %>
-<% else %>
-    <p>Budget does not have associated employees</p>
-<% end %>
+    <% else %>
+        <p>Budget does not have associated timesheets</p>
+    <% end %>
+
+<h3>Start and end dates:</h3>
+    <p>Start: <%= @budget.start_date %> --- End: <%= @budget.end_date %></p>
+
+
+
+<br />
+<br />
+<h3>Associated timesheets' dates range:</h3>
+    <% if @budget.has_assoc_timesheets? %>
+        <p>Start: <%= @budget.oldest_timesheet %> --- End: <%= @budget.most_recent_timesheet %></p>
+    <% else %>
+        <p>Budget does not have associated timesheets</p>
+    <% end %>
+
+<h3>Associated timesheets' total hours:</h3>
+    <% if @budget.has_assoc_timesheets? %>
+        <p><%= @budget.timesheets_total_hours %></p>
+    <% else %>
+        <p>Budget does not have associated timesheets</p>
+    <% end %>
+    
+<h3>Associated employees:</h3>
+    <% if @budget.has_assoc_timesheets? %>
+        <p>ID <%= @first_employee.id %>, <%= @first_employee.first_name %> <%= @first_employee.last_name %></p>
+            <% @employees.each do |e| %>
+                <% if e.id != @first_employee.id %>
+                    <p>ID <%= e.id %>, <%= e.first_name %> <%= e.last_name %></p>
+                <% end %>
+            <% end %>
+    <% else %>
+        <p>Budget does not have associated employees</p>
+    <% end %>
 
 <br />
 <%= link_to "Delete", @budget, method: :delete, data: { confirm: "This action will delete the budget and any associated timesheets" }, class: "btn btn-primary" %>

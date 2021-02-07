@@ -22,10 +22,10 @@
             <%= render 'shared/error_messages', object: f.object %>
 
             <%= f.label :hours %>
-            <%= f.number_field :hours, class: 'form-control' %>
+            <%= f.number_field :hours, required: true, class: 'form-control' %>
 
             <%= f.label :date_of_service %>
-            <%= f.date_field :date_of_service, class: 'form-control' %>
+            <%= f.date_field :date_of_service, required: true, class: 'form-control' %>
 
             <%= f.submit "Save changes", class: "btn btn-primary btn-lg btn-block" %>
             <%= link_to "Cancel", timesheet_path, class: "btn btn-info btn-block" %>

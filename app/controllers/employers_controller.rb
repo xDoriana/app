@@ -22,7 +22,7 @@ class EmployersController < ApplicationController
             flash[:success] = "Employer created"
             redirect_to employers_path
         else
-            flash[:error] = "Employer was not created"
+            flash.now[:danger] = "Employer was not created"
             render 'new'
         end
     end
@@ -37,7 +37,7 @@ class EmployersController < ApplicationController
             flash[:success] = "Employer updated"
             redirect_to employers_path
         else
-            flash[:error] = "Employer was not updated"
+            flash.now[:danger] = "Employer was not updated"
             render 'edit'
         end
     end

@@ -1,7 +1,13 @@
 require 'test_helper'
 
 class EmployeeTest < ActiveSupport::TestCase
-  # test "the truth" do
-  #   assert true
-  # end
+
+  def setup
+    @employee = employees(:one)
+  end
+
+  test "should be valid" do
+    assert @employee.valid?
+  end
+  
 end

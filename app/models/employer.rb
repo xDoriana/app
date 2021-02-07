@@ -2,8 +2,8 @@ class Employer < ApplicationRecord
     has_many :employees, dependent: :destroy
     has_many :budgets, dependent: :destroy
 
-    validates :first_name, presence: true
-    validates :last_name, presence: true
+    validates :first_name, presence: true, length: { maximum: 50 }
+    validates :last_name, presence: true, length: { maximum: 50 }
 
     def has_assoc_budgets?
         Employer.includes(:budgets).where(budgets: {employer_id: id}).any?
@@ -15,6 +15,7 @@ class Employer < ApplicationRecord
 # cum as putea face aici pt timesheets folosind direct asocierea cu timesheets (has many timesheets through budget)?
     end
 
+    # reports
     def total_budgets_hours
         budgets.sum(&:hours)
     end
@@ -27,16 +28,16 @@ class Employer < ApplicationRecord
         return total_hours
     end
 
-    def timesheet_hours_percentage_from_budgets
-        timesheet_hours_from_budgets.to_f / total_budgets_hours.to_f * 100.0
+    def hours_usage_rate
+        (timesheet_hours_from_budgets.to_f / total_budgets_hours.to_f * 100.0).round(2)
     end
 
-    def assoc_budgets_start_date
+    def budgets_start_date
         budget = budgets.order(:start_date).first
         return budget.start_date
     end
 
-    def assoc_budgets_end_date
+    def budgets_end_date
         budget = budgets.order(:end_date).last
         return budget.end_date
     end
@@ -50,7 +51,7 @@ class Employer < ApplicationRecord
         return total_days
     end
 
-    def budgets_total_timesheets_number
+    def total_timesheets_number
         total_timesheets = 0
         budgets.each do |budget|
             total_timesheets += budget.timesheets.count
@@ -59,7 +60,7 @@ class Employer < ApplicationRecord
     end
 
     def days_usage_percentage
-        (budgets_total_timesheets_number.to_f / budgets_total_days.to_f * 100.0).round(2)
+        (total_timesheets_number.to_f / budgets_total_days.to_f * 100.0).round(2)
     end
 
 

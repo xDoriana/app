@@ -24,7 +24,7 @@ class TimesheetsController < ApplicationController
             flash[:success] = "Timesheet created"
             redirect_to timesheets_path
         else
-            flash[:error] = "Timesheet was not created"
+            flash.now[:danger] = "Timesheet was not created"
             render 'new'
         end
     end
@@ -46,7 +46,7 @@ class TimesheetsController < ApplicationController
             flash[:success] = "Timesheet updated"
             redirect_to timesheets_path
         else
-            flash[:error] = "Timesheet was not updated"
+            flash.now[:danger] = "Timesheet was not updated"
             render 'edit'
             # respond_with(@timesheet)
         end
