@@ -9,6 +9,100 @@ $gray-medium-light: #eaeaea;
   box-sizing:         border-box;
 }
 
+/* bootstrap customization */
+.jumbotron {
+  background-color: transparent;
+  text-align: center;
+}
+.panel-default {
+  text-align: center;
+
+  .panel-heading {
+    background-color: transparent;
+  /*  padding: 12px; */
+  }
+  
+  .panel-footer {
+    background-color: transparent;
+    padding: 15px;
+  }
+  .panel-body {
+  /*  padding: 30px 15px 20px; */
+  }
+
+  .panel-footer {
+    border-top: transparent;
+  }
+
+  &:hover {
+    border-color: #bce8f1;
+    .panel-heading {
+      background-color: #d9edf7;
+    }
+  }
+}
+table {
+  thead, tbody {
+    th, td {
+/*      text-align: center; */
+    }
+  }
+}
+.table {
+  border-collapse: separate;
+  border-spacing: 2px;
+  -webkit-border-horizontal-spacing: 2px;
+  -webkit-border-vertical-spacing: 2px;
+  tbody, thead {
+    tr {
+      th, td {
+        padding: 15px;
+        vertical-align: middle;
+        border-top: 1px transparent; 
+      }
+    }
+  }
+}
+.table-hover {
+  tbody {
+    tr:hover {
+      background-color: #eaf5fa;
+      /* #E3F3FB; */
+    }
+  }
+}
+.btn-light-blue {
+  color: #333;
+  background-color: #fff;
+  border-color: #ccc;
+  &:hover {
+    color: #01121A;
+    background-color: #B1DAEE;
+    border-color: #7EBBD9;
+  }
+  &:active {
+    color: #01121A;;
+    background-color: #7EBBD9;
+    border-color: #569DC0;
+  }
+}
+.btn-light-red {
+  color: #333;
+  background-color: #fff;
+  border-color: #ccc;
+  &:hover {
+    color: #2A0000;
+    background-color: #FFC4C4;
+    border-color: #f3a2a2;
+  }
+  &:active {
+    color: #2A0000;;
+    background-color: #FF8F8F;
+    border-color: #FF6B6B;
+  }
+}
+
+
 /* universal */
 body {
   padding-top: 60px;
@@ -27,6 +121,7 @@ textarea {
   }
 }
 /* typography */
+/* oare sa sterg partea asta si sa las default de la bootstrap??? */
 h1, h2, h3, h4, h5, h6 {
   line-height: 1;
 }
@@ -38,12 +133,11 @@ h1 {
   text-align: center;
 }
 h2 {
-  font-size: 1.2em;
+  font-size: 3em;
   letter-spacing: -1px;
   margin-bottom: 30px;
   text-align: center;
   font-weight: normal;
-  color: $gray-light;
 }
 p {
   font-size: 1.1em;

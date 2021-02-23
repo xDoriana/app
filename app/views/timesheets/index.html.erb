@@ -1,12 +1,43 @@
-<h1>Timesheets</h1>
+<% provide(:title, "Timesheets") %>
 
-<% @timesheets.each do |timesheet| %>
-    <p>ID: <%= timesheet.id %>, Employee: <%= timesheet.employee_id %>, Budget: <%= timesheet.budget_id %>, Hours: <%= timesheet.hours %>, Date of service: <%= timesheet.date_of_service %><br />
-    <%= link_to "View", timesheet_path(timesheet.id) %> | <%= link_to "Edit", edit_timesheet_path(timesheet.id) %> | <%= link_to "Delete", timesheet, method: :delete, data: { confirm: "You sure?" }%></p>
-<!-- aici in loc de timesheet as putea pune destroy_timesheet_path(timesheet)? care ii diferenta??? -->
-    <p></p>
-<% end %>
+<div class="jumbotron">
+    <h1>Timesheets</h1>
+    <%= link_to "Create new", new_timesheet_path, class: "btn btn-primary" %>
+</div>
 
-<br />
-<h4> Create new Timesheet:</h4>
-<%= link_to "Create new", new_timesheet_path, class: "btn btn-primary" %>
+<div class="table-responsive">
+    <table class="table table-striped table-hover">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Employee ID</th>
+                <th>Employee name</th>
+                <th>Budget ID</th>
+                <th>Hours date</th>
+                <th>Date of service</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <% @timesheets.each do |timesheet| %>
+                <tr>
+                    <th><%= timesheet.id %></th>
+                    <td>ID <%= timesheet.employee_id %></td>
+                    <td><%= @employees.find(timesheet.employee_id).first_name %> <%= @employees.find(timesheet.employee_id).last_name %></td>
+                    <td>ID <%= timesheet.budget_id %></td>
+                    <td><%= timesheet.hours %></td>
+                    <td><%= timesheet.date_of_service %></td>
+                    <td>
+                        <div class="btn-group">
+                            <%= link_to "View", timesheet_path(timesheet), class: "btn btn-light-blue" %>
+                            <%= link_to "Edit", edit_timesheet_path(timesheet), class: "btn btn-light-blue" %>
+                            <%= link_to "Delete", timesheet, method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-light-red" %>
+                        </div>
+<!-- # aici in loc de timesheet as putea pune destroy_timesheet_path(timesheet)? care ii diferenta??? -->
+                    </td>
+                </tr>
+            <% end %>
+        </tbody>
+    </table>
+</div>

@@ -4,11 +4,13 @@ class TimesheetsController < ApplicationController
 
     def index
         @timesheets = Timesheet.all
+        @employees = Employee.all
     end
 
     def show
         @timesheet = Timesheet.find(params[:id])
         @employee = @timesheet.employee
+        @budget = @timesheet.budget
         @employer = @employee.employer
     end
 

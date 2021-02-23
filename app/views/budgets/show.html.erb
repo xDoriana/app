@@ -1,55 +1,114 @@
-<h1>Budget</h1>
+<% provide(:title, "Budget " + @budget.id.to_s) %>
 
-<h3>ID:</h3>
-    <p><%= @budget.id %></p>
+<div class="jumbotron">
+    <h1>Budget <%= @budget.id %></h1>
+    <%= link_to "Edit", edit_budget_path(@budget.id), class: "btn btn-primary" %>
+    <%= link_to "Delete", @budget, method: :delete, data: { confirm: "This action will delete the budget and any associated timesheets" }, class: "btn btn-danger" %>
+</div>
 
-<h3>Employer:</h3>
-    <p>ID <%= @employer.id %>, <%= @employer.first_name %> <%= @employer.last_name %></p>
+<div class="table-responsive">
+    <table class="table table-striped table-hover">
+        <tbody>
+            <tr >
+                <th>Employer</th>
+                <td>ID <%= @employer.id %></td>
+                <td><%= @employer.first_name %> <%= @employer.last_name %></td>
+                <td><%= link_to "View", employer_path(@employer), class: "btn btn-light-blue" %></td>
+            </tr>
 
-<h3>Hours:</h3>
-    <p><%= @budget.hours %></p>
+            <tr>
+                <th>Hours</th>
+                <td colspan="3"><%= @budget.hours %></td>
+            </tr>
 
-<h3>Associated timesheets:</h3>
-    <% if @budget.has_assoc_timesheets? %>
-        <% @timesheets.each do |t| %>
-            <p>ID <%= t.id %></p>
-        <% end %>
-    <% else %>
-        <p>Budget does not have associated timesheets</p>
-    <% end %>
+            <tr>
+                <th>Start and end dates</th>
 
-<h3>Start and end dates:</h3>
-    <p>Start: <%= @budget.start_date %> --- End: <%= @budget.end_date %></p>
+                <td>Start: <%= @budget.start_date %></td>
+                <td colspan="2">End: <%= @budget.end_date %></td>
+            </tr>
+            
+            <% if @budget.has_assoc_timesheets? %>
+                    <tr>
+                        <th rowspan="<%= @budget.assoc_timesheets_count %>">Associated timesheets</th>
+                        <td>ID <%= @timesheets[0].id %></td>
+                        <td>Date: <%= @timesheets[0].date_of_service %></td>
+                        <td><%= link_to "View", timesheet_path(@timesheets[0]), class: "btn btn-light-blue" %></td>
+                    </tr>
 
-
-
-<br />
-<br />
-<h3>Associated timesheets' dates range:</h3>
-    <% if @budget.has_assoc_timesheets? %>
-        <p>Start: <%= @budget.oldest_timesheet %> --- End: <%= @budget.most_recent_timesheet %></p>
-    <% else %>
-        <p>Budget does not have associated timesheets</p>
-    <% end %>
-
-<h3>Associated timesheets' total hours:</h3>
-    <% if @budget.has_assoc_timesheets? %>
-        <p><%= @budget.timesheets_total_hours %></p>
-    <% else %>
-        <p>Budget does not have associated timesheets</p>
-    <% end %>
-    
-<h3>Associated employees:</h3>
-    <% if @budget.has_assoc_timesheets? %>
-        <p>ID <%= @first_employee.id %>, <%= @first_employee.first_name %> <%= @first_employee.last_name %></p>
-            <% @employees.each do |e| %>
-                <% if e.id != @first_employee.id %>
-                    <p>ID <%= e.id %>, <%= e.first_name %> <%= e.last_name %></p>
-                <% end %>
+                    <% @timesheets.drop(1).each do |t| %>
+                        <tr>
+                            <td>ID <%= t.id %></td>
+                            <td>Date: <%= t.date_of_service %></td>
+                            <td><%= link_to "View", timesheet_path(t), class: "btn btn-light-blue" %></td>
+                        </tr>
+                    <% end %>
+                <% else %>
+                    <tr>
+                        <th>Associated timesheets</th>
+                        <td colspan="3">Budget does not have associated timesheets</td>
+                    </tr>
             <% end %>
-    <% else %>
-        <p>Budget does not have associated employees</p>
-    <% end %>
 
-<br />
-<%= link_to "Delete", @budget, method: :delete, data: { confirm: "This action will delete the budget and any associated timesheets" }, class: "btn btn-primary" %>
+<!-- REPORTS -->
+
+            <tr class="info">
+                <th colspan="4" class="text-center">ADDITIONAL INFO</th>
+            </tr>
+
+            <tr>
+                <th>Associated timesheets' dates range</th>
+                <% if @budget.has_assoc_timesheets? %>
+                        <td>Start: <%= @budget.oldest_timesheet %></td>
+                        <td colspan="2">End: <%= @budget.most_recent_timesheet %></td>
+                    <% else %>
+                        <td colspan="3">Budget does not have associated timesheets</td>
+                <% end %>
+            </tr>
+
+            <tr>
+                <th>Associated timesheets' total hours</th>
+                <% if @budget.has_assoc_timesheets? %>
+                        <td colspan="3"><%= @budget.timesheets_total_hours %></td>
+                    <% else %>
+                        <td colspan="3">Budget does not have associated timesheets</td>
+                <% end %>
+            </tr>
+
+            <tr>
+                <th>Budget hours usage rate</th>
+                <% if @budget.has_assoc_timesheets? %>
+                        <td colspan="3"><%= @budget.hours_usage_rate %>%</td>
+                    <% else %>
+                        <td colspan="3">Budget does not have associated timesheets</td>
+                <% end %>
+            </tr>
+
+            
+<!-- # CUM FAC SA NU MAI FOLOSESC variabila @first_employee si sa arat in view direct doar distinct/unique employees? -->
+            <% if @budget.has_assoc_timesheets? %>
+                    <tr>
+                        <th rowspan="<%= @budget.assoc_employees_count %>">Associated employees</th>
+                        <td>ID <%= @first_employee.id %></td>
+                        <td><%= @first_employee.first_name %> <%= @first_employee.last_name %></td>
+                        <td><%= link_to "View", employee_path(@first_employee), class: "btn btn-light-blue" %></td>
+                    </tr>
+
+                    <% @employees.each do |e| %>
+                        <% if e.id != @first_employee.id %>
+                            <tr>
+                                <td>ID <%= e.id %></td>
+                                <td><%= e.first_name %> <%= e.last_name %></td>
+                                <td><%= link_to "View", employee_path(e), class: "btn btn-light-blue" %></td>
+                            </tr>
+                        <% end %>
+                    <% end %>
+                <% else %>
+                    <tr>
+                        <th>Associated employees</th>
+                        <td colspan="3">Budget does not have associated employees</td>
+                    </tr>
+            <% end %>
+        </tbody>
+    </table>
+</div>

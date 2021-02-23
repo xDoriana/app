@@ -1,10 +1,82 @@
-<h1>Employees</h1>
+<% provide(:title, "Employees") %>
 
-<% @employees.each do |employee| %>
-    <p>ID: <%= employee.id %>, <%= employee.first_name %> <%= employee.last_name %> - <%= link_to "View", employee_path(employee.id) %> | <%= link_to "Edit", edit_employee_path(employee.id) %> | <%= link_to "Delete", employee, method: :delete, data: { confirm: "This action will delete the employee and any associated timesheets" }%><br />
-    Employer: ID <%= employee.employer_id %></p>
-<% end %>
+<div class="jumbotron">
+    <h1>Employees</h1>
+    <%= link_to "Create new", new_employee_path, class: "btn btn-primary" %>
+</div>
 
-<br />
-<h4> Create new Employee:</h4>
-<%= link_to "Create new", new_employee_path, class: "btn btn-primary" %>
+<div class="table-responsive">
+    <table class="table table-striped table-hover">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>First name</th>
+                <th>Last name</th>
+                <th>Employer ID</td>
+                <th>Employer name</td>
+                <th>Action</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <% @employees.each do |employee| %>
+                <tr>
+                    <th><%= employee.id %></th>
+                    <td><%= employee.first_name %></td>
+                    <td><%= employee.last_name %></td>
+                    <td>ID <%= employee.employer_id %></td>
+                    <td><%= @employers.find(employee.employer_id).first_name %> <%= @employers.find(employee.employer_id).last_name %></td>
+                    <td>
+                        <div class="btn-group">
+                            <%= link_to "View", employee_path(employee), class: "btn btn-light-blue" %>
+                            <%= link_to "Edit", edit_employee_path(employee), class: "btn btn-light-blue" %>
+                            <%= link_to "Delete", employee, method: :delete, data: { confirm: "This action will delete the employee and any associated timesheets" }, class: "btn btn-default" %>
+                        </div>
+                    </td>
+                </tr>
+            <% end %>
+        </tbody>
+    </table>
+</div>
+
+
+
+
+
+
+
+
+<!-- LAS ASTA CA POATE IMI TREBE
+
+<div class="row">
+    <% @employees.each do |employee| %>
+        <div class="col-lg-3 col-lg-offset-0 col-md-4 col-md-offset-0 col-sm-6 col-sm-offset-0 col-xs-10 col-xs-offset-1">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">ID: <%= employee.id %></h3>
+                </div>
+
+                <div class="panel-body">
+                    <h3>
+                        <%= employee.first_name %><br />
+                        <%= employee.last_name %>
+                    </h3>
+                    <br />
+                    <p>Employer: ID <%= employee.employer_id %></p>
+                </div>
+
+                <div class="panel-footer">
+                    <p>
+                        <%= link_to "View", employee_path(employee), class: "btn btn-default btn-block" %>
+                    </p>
+                    <p class="btn-group btn-group-justified">
+                        <%= link_to "Edit", edit_employee_path(employee), class: "btn btn-default" %>
+                        <%= link_to "Delete", employee, method: :delete, data: { confirm: "This action will delete the employee and any associated timesheets" }, class: "btn btn-default" %>
+                    </p>
+                </div>
+            </div>
+        </div>
+    <% end %>
+</div>
+
+-->

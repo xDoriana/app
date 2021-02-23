@@ -1,11 +1,42 @@
-<h1>Budgets</h1>
+<% provide(:title, "Budgets") %>
 
-<% @budgets.each do |budget| %>
-    <p>ID: <%= budget.id %>, Employer: <%= budget.employer_id %>, Hours: <%= budget.hours %>, Start date: <%= budget.start_date %>, End date: <%= budget.end_date %><br />
-    <%= link_to "View", budget_path(budget.id) %> | <%= link_to "Edit", edit_budget_path(budget.id) %> | <%= link_to "Delete", budget, method: :delete, data: { confirm: "This action will delete the budget and any associated timesheets" }%></p>
-    <p></p>
-<% end %>
+<div class="jumbotron">
+    <h1>Budgets</h1>
+    <%= link_to "Create new", new_budget_path, class: "btn btn-primary" %>
+</div>
 
-<br/>
-<h4> Create new Budget:</h4>
-<%= link_to "Create new", new_budget_path, class: "btn btn-primary" %>
+<div class="table-responsive">
+    <table class="table table-striped table-hover">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Employer ID</th>
+                <th>Employer name</th>
+                <th>Hours</th>
+                <th>Start date</th>
+                <th>End date</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <% @budgets.each do |budget| %>
+                <tr>
+                    <th><%= budget.id %></th>
+                    <td>ID <%= budget.employer_id %></td>
+                    <td><%= @employers.find(budget.employer_id).first_name %> <%= @employers.find(budget.employer_id).last_name %></td>
+                    <td><%= budget.hours %></td>
+                    <td><%= budget.start_date %></td>
+                    <td><%= budget.end_date %></td>
+                    <td>
+                        <div class="btn-group">
+                            <%= link_to "View", budget_path(budget), class: "btn btn-light-blue" %>
+                            <%= link_to "Edit", edit_budget_path(budget), class: "btn btn-light-blue" %>
+                            <%= link_to "Delete", budget, method: :delete, data: { confirm: "This action will delete the budget and any associated timesheets" }, class: "btn btn-light-red" %>
+                        </div>
+                    </td>
+                </tr>
+            <% end %>
+        </tbody>
+    </table>
+</div>

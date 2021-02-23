@@ -20,4 +20,22 @@ class EmployerTest < ActiveSupport::TestCase
     assert_not @employer.valid?
   end
 
+  ## assoc_budgets_count
+
+  ## assoc_employees_count
+
+  ## total_budgets_hours
+
+  ## timesheets_hours_from_budgets_hours
+
+  ## budgets_hours_usage_rate
+
+  ## budgets_start_date
+
+  ## budgets_end_date
+
+  ## budgets_total_days
+
+  ## assoc_timesheets_count
+
 end

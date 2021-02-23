@@ -1,6 +1,8 @@
-<% provide(:title, "Edit Budget") %>
+<% provide(:title, "Edit Budget " + @budget.id.to_s) %>
 
-<h1>Edit Budget</h1>
+<div class="jumbotron">
+    <h1>Edit Budget <%= @budget.id %></h1>
+</div>
 
 <div class="row">
     <div class="col-md-6 col-md-offset-3">

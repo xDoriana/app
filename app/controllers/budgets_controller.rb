@@ -4,6 +4,7 @@ class BudgetsController < ApplicationController
 
     def index
         @budgets = Budget.all
+        @employers = Employer.all
     end
 
     def show
@@ -12,7 +13,8 @@ class BudgetsController < ApplicationController
         @timesheets = @budget.timesheets
         @employees = @budget.employees
         @first_employee = @employees.order(:id).first
-# fa sa fie chestia asta mai optimizata, uita-te cum am facut la employer.rb
+# fa sa fie chestia asta mai optimizata, uita-te cum am facut la employer.rb -- ce am vrut sa zic aici?
+# cum fac sa nu mai folosesc variabila @first_employee si sa arat in view direct doar distinct/unique employees?
     end
 
     def new

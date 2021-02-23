@@ -4,6 +4,7 @@ class EmployeesController < ApplicationController
 
     def index
         @employees = Employee.all
+        @employers = Employer.all
     end
 
     def show
@@ -12,6 +13,7 @@ class EmployeesController < ApplicationController
         @timesheets = @employee.timesheets
         @budgets = @employee.budgets
         @first_budget = @budgets.order(:id).first
+# cum fac sa nu mai folosesc variabila @first_budget si sa arat in view direct doar distinct/unique employees?
     end
 
     def new

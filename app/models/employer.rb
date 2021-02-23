@@ -1,18 +1,30 @@
 class Employer < ApplicationRecord
     has_many :employees, dependent: :destroy
     has_many :budgets, dependent: :destroy
+    has_many :timesheets, through: :employees
+    has_many :timesheets, through: :budgets
 
     validates :first_name, presence: true, length: { maximum: 50 }
     validates :last_name, presence: true, length: { maximum: 50 }
 
     def has_assoc_budgets?
-        Employer.includes(:budgets).where(budgets: {employer_id: id}).any?
-# cum as putea face aici pt timesheets folosind direct asocierea cu timesheets (has many timesheets through budget)?
+        budgets.exists?
+    end
+
+    def assoc_budgets_count
+        if has_assoc_budgets?
+          return budgets.count
+        end
     end
 
     def has_assoc_employees?
-        Employer.includes(:employees).where(employees: {employer_id: id}).any?
-# cum as putea face aici pt timesheets folosind direct asocierea cu timesheets (has many timesheets through budget)?
+        employees.exists?
+    end
+
+    def assoc_employees_count
+        if has_assoc_employees?
+          return employees.count
+        end
     end
 
     # reports
@@ -20,16 +32,12 @@ class Employer < ApplicationRecord
         budgets.sum(&:hours)
     end
 
-    def timesheet_hours_from_budgets
-        total_hours = 0
-        budgets.each do |budget|
-            total_hours += budget.timesheets.sum(&:hours)
-        end
-        return total_hours
+    def timesheets_hours_from_budgets_hours
+        timesheets.sum(&:hours)
     end
 
-    def hours_usage_rate
-        (timesheet_hours_from_budgets.to_f / total_budgets_hours.to_f * 100.0).round(2)
+    def budgets_hours_usage_rate
+        (timesheets_hours_from_budgets_hours.to_f / total_budgets_hours.to_f * 100.0).round(2)
     end
 
     def budgets_start_date
@@ -51,17 +59,18 @@ class Employer < ApplicationRecord
         return total_days
     end
 
-    def total_timesheets_number
-        total_timesheets = 0
-        budgets.each do |budget|
-            total_timesheets += budget.timesheets.count
-        end
-        return total_timesheets
+    def has_assoc_timesheets?
+        timesheets.exists?
     end
 
-    def days_usage_percentage
-        (total_timesheets_number.to_f / budgets_total_days.to_f * 100.0).round(2)
+    def assoc_timesheets_count
+        if has_assoc_timesheets?
+            return timesheets.count
+          end
+        # total_timesheets = 0
+        # budgets.each do |budget|
+        #     total_timesheets += budget.timesheets.count
+        # end
+        # return total_timesheets
     end
-
-
 end

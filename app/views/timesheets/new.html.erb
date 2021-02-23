@@ -1,6 +1,8 @@
 <% provide(:title, "Add Timesheet") %>
 
-<h1>Add a new Timesheet</h1>
+<div class="jumbotron">
+    <h1>Add a new Timesheet</h1>
+</div>
 
 <div class="row">
     <div class="col-md-6 col-md-offset-3">
@@ -16,8 +18,8 @@
             <%= f.select :budget_id, Budget.all.collect { |x| [x.id]}, {:include_blank => 'Select One'}, required: true, class: 'form-control' %>
 
             <%= f.label :hours %>
+<!-- # de ce daca scot required: true nu imi da eroare ca trebe sa fie prezenta???  -->
             <%= f.number_field :hours, required: true, class: 'form-control' %>
-<!-- de ce daca scot required: true nu imi da eroare ca trebe sa fie prezenta???  -->
 
             <%= f.label :date_of_service %>
             <%= f.date_field :date_of_service, required: true, class: 'form-control' %>

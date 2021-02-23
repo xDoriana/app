@@ -42,5 +42,5 @@ class BudgetsControllerTest < ActionDispatch::IntegrationTest
     end
     assert_redirected_to login_url
   end
-
+# mai am ceva ce pot adauga la testele de controller?
 end

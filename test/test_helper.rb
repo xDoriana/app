@@ -2,7 +2,7 @@ ENV['RAILS_ENV'] ||= 'test'
 require_relative '../config/environment'
 require 'rails/test_help'
 
-# ce facastea de mai sus??? imi trebuie toate???
+# ce fac astea de mai sus??? imi trebuie toate???
 
 class ActiveSupport::TestCase
   # Run tests in parallel with specified workers
@@ -29,5 +29,7 @@ class ActiveSupport::TestCase
                                             password: password,
                                             remember_me: remember_me } }
     end
+# imi trebe chestia asta specifica????
+
   end
 end

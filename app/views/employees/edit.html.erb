@@ -1,6 +1,9 @@
-<% provide(:title, "Edit Employee") %>
+<% provide(:title, "Edit Employee " + @employee.id.to_s) %>
 
-<h1>Edit Employee</h1>
+<div class="jumbotron">
+    <h1>Edit Employee <%= @employee.id %></h1>
+</div>
+
 
 <div class="row">
     <div class="col-md-6 col-md-offset-3">
