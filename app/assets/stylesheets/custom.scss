@@ -14,40 +14,6 @@ $gray-medium-light: #eaeaea;
   background-color: transparent;
   text-align: center;
 }
-.panel-default {
-  text-align: center;
-
-  .panel-heading {
-    background-color: transparent;
-  /*  padding: 12px; */
-  }
-  
-  .panel-footer {
-    background-color: transparent;
-    padding: 15px;
-  }
-  .panel-body {
-  /*  padding: 30px 15px 20px; */
-  }
-
-  .panel-footer {
-    border-top: transparent;
-  }
-
-  &:hover {
-    border-color: #bce8f1;
-    .panel-heading {
-      background-color: #d9edf7;
-    }
-  }
-}
-table {
-  thead, tbody {
-    th, td {
-/*      text-align: center; */
-    }
-  }
-}
 .table {
   border-collapse: separate;
   border-spacing: 2px;
@@ -102,7 +68,6 @@ table {
   }
 }
 
-
 /* universal */
 body {
   padding-top: 60px;
@@ -120,8 +85,8 @@ textarea {
     margin-bottom: 10px;
   }
 }
+
 /* typography */
-/* oare sa sterg partea asta si sa las default de la bootstrap??? */
 h1, h2, h3, h4, h5, h6 {
   line-height: 1;
 }
@@ -143,8 +108,8 @@ p {
   font-size: 1.1em;
   line-height: 1.7em;
 }
+
 /* header */
-/* baga un logo la meniu sau sterge clasa asta */
 #logo {
   float: left;
   margin-right: 10px;

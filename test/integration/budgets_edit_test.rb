@@ -22,8 +22,7 @@ class BudgetsEditTest < ActionDispatch::IntegrationTest
     get edit_budget_path(@budget)
     assert_template 'budgets/edit'
     assert_select 'title', full_title("Edit Budget " + @budget.id.to_s)
-    # de ce nu merge chestia asta???
-    assert_select 'h1', text: "Edit budget " + @budget.id.to_s
+    assert_select 'h1', text: "Edit Budget " + @budget.id.to_s
   end
 
   test "unsuccessful edit" do
