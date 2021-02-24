@@ -1,26 +1,23 @@
 <% provide(:title, "Add Employer") %>
 
 <div class="jumbotron">
-    <h1>Add a new Employer</h1>
+	<h1>Add a new Employer</h1>
 </div>
 
 <div class="row">
-    <div class="col-md-6 col-md-offset-3">
+	<div class="col-md-6 col-md-offset-3">
 
-        <%= form_for @employer do |f| %>
+		<%= form_for @employer do |f| %>
+			<%= render 'shared/error_messages', object: f.object %>
 
-            <%= render 'shared/error_messages', object: f.object %>
+			<%= f.label :first_name %>
+			<%= f.text_field :first_name, class: 'form-control' %>
 
-            <%= f.label :first_name %>
-            <%= f.text_field :first_name, class: 'form-control' %>
+			<%= f.label :last_name %>
+			<%= f.text_field :last_name, class: 'form-control' %>
 
-            <%= f.label :last_name %>
-            <%= f.text_field :last_name, class: 'form-control' %>
-
-            <%= f.submit "Submit", class: "btn btn-primary btn-lg btn-block" %>
-            <%= link_to "Cancel", employers_path, class: "btn btn-info btn-block" %>
-            
-        <% end %>
-
-    </div>
+			<%= f.submit "Submit", class: "btn btn-primary btn-lg btn-block" %>
+			<%= link_to "Cancel", employers_path, class: "btn btn-info btn-block" %>
+		<% end %>
+	</div>
 </div>

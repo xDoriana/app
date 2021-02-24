@@ -30,7 +30,7 @@ class Timesheet < ApplicationRecord
   end
 
   def hours_are_within_budget_hours_left
-#   all_timesheets = Timesheet.where(budget_id: budget_id)
+  # all_timesheets = Timesheet.where(budget_id: budget_id)
     return unless hours && budget
 
     if ( hours > hours_left) && (hours <= budget.hours)

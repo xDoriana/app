@@ -1,36 +1,36 @@
 <% provide(:title, "Employers") %>
 
 <div class="jumbotron">
-    <h1>Employers</h1>
-    <%= link_to "Create new", new_employer_path, class: "btn btn-primary" %>
+	<h1>Employers</h1>
+	<%= link_to "Create new", new_employer_path, class: "btn btn-primary" %>
 </div>
 
 <div class="table-responsive">
-    <table class="table table-striped table-hover">
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>First name</th>
-                <th>Last name</th>
-                <th>Action</th>
-            </tr>
-        </thead>
+	<table class="table table-striped table-hover">
+		<thead>
+			<tr>
+				<th>ID</th>
+				<th>First name</th>
+				<th>Last name</th>
+				<th>Action</th>
+			</tr>
+		</thead>
 
-        <tbody>
-            <% @employers.each do |employer| %>
-                <tr>
-                    <th><%= employer.id %></th>
-                    <td><%= employer.first_name %></td>
-                    <td><%= employer.last_name %></td>
-                    <td>
-                        <div class="btn-group">
-                            <%= link_to "View", employer_path(employer), class: "btn btn-light-blue" %>
-                            <%= link_to "Edit", edit_employer_path(employer), class: "btn btn-light-blue" %>
-                            <%= link_to "Delete", employer, method: :delete, data: { confirm: "This action will delete the employer and any associated records" }, class: "btn btn-light-red" %>
-                        </div>
-                    </td>
-                </tr>
-            <% end %>
-        </tbody>
-    </table>
+		<tbody>
+			<% @employers.each do |employer| %>
+				<tr>
+					<th><%= employer.id %></th>
+					<td><%= employer.first_name %></td>
+					<td><%= employer.last_name %></td>
+					<td>
+						<div class="btn-group">
+							<%= link_to "View", employer_path(employer), class: "btn btn-light-blue" %>
+							<%= link_to "Edit", edit_employer_path(employer), class: "btn btn-light-blue" %>
+							<%= link_to "Delete", employer, method: :delete, data: { confirm: "This action will delete the employer and any associated records" }, class: "btn btn-light-red" %>
+						</div>
+					</td>
+				</tr>
+			<% end %>
+		</tbody>
+	</table>
 </div>

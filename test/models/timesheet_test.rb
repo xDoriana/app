@@ -82,6 +82,4 @@ class TimesheetTest < ActiveSupport::TestCase
     assert_not @timesheet.valid?
     assert_includes(@timesheet.errors[:date_of_service], "does not fall in budget date range. Budget date range: #{@budget.start_date} - #{@budget.end_date}")
   end
-
-  
 end

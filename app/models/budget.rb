@@ -66,7 +66,6 @@ class Budget < ApplicationRecord
     end
   end
 
-
   def associated_timesheets_dates
     if has_assoc_timesheets? && oldest_timesheet < start_date
       errors.add(:start_date, "does not cover timesheets' dates range. Range to cover: #{oldest_timesheet} - #{most_recent_timesheet}")
@@ -76,5 +75,4 @@ class Budget < ApplicationRecord
       errors.add(:end_date, "does not cover timesheets' dates range. Range to cover: #{oldest_timesheet} - #{most_recent_timesheet}")
     end
   end
-
 end

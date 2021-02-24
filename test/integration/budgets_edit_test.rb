@@ -52,5 +52,4 @@ class BudgetsEditTest < ActionDispatch::IntegrationTest
     assert_equal start_date.to_date, @budget.start_date
     assert_equal end_date.to_date, @budget.end_date
   end
-  
 end

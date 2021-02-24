@@ -21,5 +21,4 @@ class Employee < ApplicationRecord
       return budgets.distinct.count
     end
   end
-
 end

@@ -1,32 +1,28 @@
 <% provide(:title, "Add Timesheet") %>
 
 <div class="jumbotron">
-    <h1>Add a new Timesheet</h1>
+	<h1>Add a new Timesheet</h1>
 </div>
 
 <div class="row">
-    <div class="col-md-6 col-md-offset-3">
+	<div class="col-md-6 col-md-offset-3">
+		<%= form_for @timesheet do |f| %>
+			<%= render 'shared/error_messages', object: f.object %>
+			
+			<%= f.label :employee_id %>
+			<%= f.select :employee_id, Employee.all.collect { |e| ["ID #{e.id}, #{e.first_name} #{e.last_name} - Employer #{e.employer_id}", e.id]}, {:include_blank => 'Select One'}, required: true, class: 'form-control' %>
 
-        <%= form_for @timesheet do |f| %>
-            
-            <%= render 'shared/error_messages', object: f.object %>
-            
-            <%= f.label :employee_id %>
-            <%= f.select :employee_id, Employee.all.collect { |e| ["ID #{e.id}, #{e.first_name} #{e.last_name} - Employer #{e.employer_id}", e.id]}, {:include_blank => 'Select One'}, required: true, class: 'form-control' %>
+			<%= f.label :budget_id %>
+			<%= f.select :budget_id, Budget.all.collect { |b| ["ID #{b.id}, (#{b.start_date} - #{b.end_date}) - Employer #{b.employer_id}", b.id]}, {:include_blank => 'Select One'}, required: true, class: 'form-control' %>
 
-            <%= f.label :budget_id %>
-            <%= f.select :budget_id, Budget.all.collect { |b| ["ID #{b.id}, (#{b.start_date} - #{b.end_date}) - Employer #{b.employer_id}", b.id]}, {:include_blank => 'Select One'}, required: true, class: 'form-control' %>
+			<%= f.label :hours %>
+			<%= f.number_field :hours, required: true, class: 'form-control' %>
 
-            <%= f.label :hours %>
-            <%= f.number_field :hours, required: true, class: 'form-control' %>
+			<%= f.label :date_of_service %>
+			<%= f.date_field :date_of_service, required: true, class: 'form-control' %>
 
-            <%= f.label :date_of_service %>
-            <%= f.date_field :date_of_service, required: true, class: 'form-control' %>
-
-            <%= f.submit "Submit", class: "btn btn-primary btn-lg btn-block" %>
-            <%= link_to "Cancel", timesheets_path, class: "btn btn-info btn-block" %>
-            
-        <% end %>
-    
-    </div>
+			<%= f.submit "Submit", class: "btn btn-primary btn-lg btn-block" %>
+			<%= link_to "Cancel", timesheets_path, class: "btn btn-info btn-block" %>
+		<% end %>
+	</div>
 </div>

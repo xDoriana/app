@@ -1,10 +1,10 @@
 <% provide(:title, "Home") %>
 
 <div class="jumbotron">
-    <h1>Welcome to the Timesheet App</h1>
-    <% if logged_in? %>
-        <h2><small>Have a productive session!</small></h2>
-    <% else %>
-        <h2><small>Please <%= link_to "Log in", login_path %> to start using the application!</small></h2>
-    <% end %>
+	<h1>Welcome to the Timesheet App</h1>
+	<% if logged_in? %>
+		<h2><small>Have a productive session!</small></h2>
+	<% else %>
+		<h2><small>Please <%= link_to "Log in", login_path %> to start using the application!</small></h2>
+	<% end %>
 </div>

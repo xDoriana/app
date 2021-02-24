@@ -1,38 +1,34 @@
 <% provide(:title, "Edit Timesheet " + @timesheet.id.to_s) %>
 
 <div class="jumbotron">
-    <h1>Edit Timesheet <%= @timesheet.id %></h1>
+	<h1>Edit Timesheet <%= @timesheet.id %></h1>
 </div>
 
 <div class="row">
-    <div class="col-md-6 col-md-offset-3">
+	<div class="col-md-6 col-md-offset-3">
+		<strong>ID: </strong><%= @timesheet.id %>
+		<br></br>
 
-        <strong>ID: </strong><%= @timesheet.id %>
-        <br></br>
+		<strong>Employer: </strong>ID <%= @employee.id %>, <%= @employee.first_name %> <%= @employee.last_name %>
+		<br></br>
 
-        <strong>Employer: </strong>ID <%= @employee.id %>, <%= @employee.first_name %> <%= @employee.last_name %>
-        <br></br>
+		<strong>Budget: </strong>ID <%= @budget.id %>
+		<br></br>
 
-        <strong>Budget: </strong>ID <%= @budget.id %>
-        <br></br>
+		<strong>Employer: </strong>ID <%= @employer.id %>, <%= @employer.first_name %> <%= @employer.last_name %>
+		<br></br>
 
-        <strong>Employer: </strong>ID <%= @employer.id %>, <%= @employer.first_name %> <%= @employer.last_name %>
-        <br></br>
+		<%= form_for @timesheet do |f| %>
+			<%= render 'shared/error_messages', object: f.object %>
 
-        <%= form_for @timesheet do |f| %>
+			<%= f.label :hours %>
+			<%= f.number_field :hours, required: true, class: 'form-control' %>
 
-            <%= render 'shared/error_messages', object: f.object %>
+			<%= f.label :date_of_service %>
+			<%= f.date_field :date_of_service, required: true, class: 'form-control' %>
 
-            <%= f.label :hours %>
-            <%= f.number_field :hours, required: true, class: 'form-control' %>
-
-            <%= f.label :date_of_service %>
-            <%= f.date_field :date_of_service, required: true, class: 'form-control' %>
-
-            <%= f.submit "Save changes", class: "btn btn-primary btn-lg btn-block" %>
-            <%= link_to "Cancel", timesheet_path, class: "btn btn-info btn-block" %>
-
-        <% end %>
-
-    </div>
+			<%= f.submit "Save changes", class: "btn btn-primary btn-lg btn-block" %>
+			<%= link_to "Cancel", timesheet_path, class: "btn btn-info btn-block" %>
+		<% end %>
+	</div>
 </div>
