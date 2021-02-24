@@ -4,7 +4,6 @@
     <h1>Timesheet <%= @timesheet.id %></h1>
     <%= link_to "Edit", edit_timesheet_path(@timesheet.id), class: "btn btn-primary" %>
     <%= link_to "Delete", @timesheet, method: :delete, data: { confirm: "You sure?" }, class: "btn btn-danger" %>
-<!-- # aici in loc de @timesheet as putea pune destroy_timesheet_path(@timesheet)? care ii diferenta??? -->
 </div>
 
 

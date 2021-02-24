@@ -11,9 +11,7 @@ class EmployeesController < ApplicationController
         @employee = Employee.find(params[:id])
         @employer = @employee.employer
         @timesheets = @employee.timesheets
-        @budgets = @employee.budgets
-        @first_budget = @budgets.order(:id).first
-# cum fac sa nu mai folosesc variabila @first_budget si sa arat in view direct doar distinct/unique employees?
+        @budgets = @employee.budgets.distinct.order(:id)
     end
 
     def new
@@ -57,6 +55,7 @@ class EmployeesController < ApplicationController
     end
 
     private
+    
     def employee_params
         params.require(:employee).permit(:employer_id, :first_name, :last_name)
     end

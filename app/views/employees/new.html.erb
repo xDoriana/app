@@ -12,7 +12,7 @@
             <%= render 'shared/error_messages', object: f.object %>
             
             <%= f.label :employer_id %>
-            <%= f.select :employer_id, Employer.all.collect { |x| [x.first_name, x.last_name, x.id]}, {:include_blank => 'Select One'}, class: 'form-control' %>
+            <%= f.select :employer_id, Employer.all.collect { |e| ["ID #{e.id}, #{e.first_name} #{e.last_name}", e.id]}, {:include_blank => 'Select One'}, class: 'form-control' %>
 
             <%= f.label :first_name %>
             <%= f.text_field :first_name, class: 'form-control' %>

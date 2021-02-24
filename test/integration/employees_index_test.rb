@@ -1,6 +1,7 @@
 require 'test_helper'
 
 class EmployeesIndexTest < ActionDispatch::IntegrationTest
+  include ApplicationHelper
 
   def setup
     @user = users(:jane)
@@ -11,14 +12,17 @@ class EmployeesIndexTest < ActionDispatch::IntegrationTest
     get employees_path
     assert_redirected_to login_path
     follow_redirect!
+    assert_not flash.empty?
     get users_path
     assert_template 'users/index'
   end
 
-  test "index as logged-in user including view, edit, delete and create new links" do
+  test "index as logged-in user" do
     log_in_as(@user)
     get employees_path
     assert_template 'employees/index'
+    assert_select 'title', full_title("Employees")
+    assert_select 'h1', text: "Employees"
     # 'Create new' Employee link
     assert_select 'a[href=?]', new_employee_path, text: "Create new"
     # Employee 'View' and 'Edit' links

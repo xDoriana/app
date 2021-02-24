@@ -11,10 +11,7 @@ class BudgetsController < ApplicationController
         @budget = Budget.find(params[:id])
         @employer = @budget.employer
         @timesheets = @budget.timesheets
-        @employees = @budget.employees
-        @first_employee = @employees.order(:id).first
-# fa sa fie chestia asta mai optimizata, uita-te cum am facut la employer.rb -- ce am vrut sa zic aici?
-# cum fac sa nu mai folosesc variabila @first_employee si sa arat in view direct doar distinct/unique employees?
+        @employees = @budget.employees.distinct.order(:id)
     end
 
     def new
@@ -24,6 +21,7 @@ class BudgetsController < ApplicationController
 
     def create
         @budget = Budget.new(budget_params)
+
         if @budget.save
             flash[:success] = "Budget created"
             redirect_to budgets_path
@@ -41,7 +39,6 @@ class BudgetsController < ApplicationController
     def update
         @budget = Budget.find(params[:id])
         @employer = @budget.employer
-
         if @budget.update(budget_update_params)
             flash[:success] = "Budget updated"
             redirect_to budgets_path
@@ -59,6 +56,7 @@ class BudgetsController < ApplicationController
     end
 
     private
+    
     def budget_params
         params.require(:budget).permit(:employer_id, :hours, :start_date, :end_date)
     end

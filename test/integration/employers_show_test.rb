@@ -1,8 +1,7 @@
 require 'test_helper'
 
 class EmployersShowTest < ActionDispatch::IntegrationTest
-    include ApplicationHelper
-# aici am metoda full title
+  include ApplicationHelper
 
   def setup
     @user = users(:jane)
@@ -13,6 +12,7 @@ class EmployersShowTest < ActionDispatch::IntegrationTest
     get employer_path(@employer)
     assert_redirected_to login_path
     follow_redirect!
+    assert_not flash.empty?
     get users_path
     assert_template 'users/index'
   end
@@ -21,12 +21,8 @@ class EmployersShowTest < ActionDispatch::IntegrationTest
     log_in_as(@user)
     get employer_path(@employer)
     assert_template 'employers/show'
-    assert_select 'title', full_title("Employer")
-    assert_select 'h1', text: "Employer"
-    assert_select 'h3', text: "ID"
-    assert_select 'h3', text: "Name"
-    assert_select 'h3', text: "Associated employees"
-    assert_select 'h3', text: "Associated budgets"
+    assert_select 'title', full_title("Employer " + @employer.id.to_s)
+    assert_select 'h1', text: "Employer " + @employer.id.to_s
     # Edit employer button
     assert_select 'a[href=?]', edit_employer_path(@employer.id), text: 'Edit'
     # Delete employer button
@@ -35,5 +31,4 @@ class EmployersShowTest < ActionDispatch::IntegrationTest
       delete employer_path(@employer)
     end
   end 
-
 end

@@ -1,6 +1,7 @@
 require 'test_helper'
 
 class TimesheetsEditTest < ActionDispatch::IntegrationTest
+  include ApplicationHelper
 
   def setup
     @user = users(:jane)
@@ -11,6 +12,7 @@ class TimesheetsEditTest < ActionDispatch::IntegrationTest
     get edit_timesheet_path(@timesheet)
     assert_redirected_to login_path
     follow_redirect!
+    assert_not flash.empty?
     get users_path
     assert_template 'users/index'
   end
@@ -19,17 +21,17 @@ class TimesheetsEditTest < ActionDispatch::IntegrationTest
     log_in_as(@user)
     get edit_timesheet_path(@timesheet)
     assert_template 'timesheets/edit'
+    assert_select 'title', full_title("Edit Timesheet " + @timesheet.id.to_s)
+    assert_select 'h1', text: "Edit Timesheet " + @timesheet.id.to_s
   end
 
   test "unsuccessful edit" do
     log_in_as(@user)
     get edit_timesheet_path(@timesheet)
     assert_template 'timesheets/edit'
-    patch timesheet_path(@timesheet), params: { timesheet: { employee_id: 0,
-# oare aici ii ok daca pun employer_id, desi ala teoretic ii blocat la editare? oare trebe ghilimele la employee_id si budget_id??
-                                                            budget_id: 0,
-                                                            hours:  0,
-                                                            date_of_service: '2021-01-12' } }
+    patch timesheet_path(@timesheet), params: { timesheet: 
+      { hours:  '0', date_of_service: '2021-01-30' } }
+    assert_not flash.empty?
     assert_template 'timesheets/edit'
   end
 
@@ -39,13 +41,12 @@ class TimesheetsEditTest < ActionDispatch::IntegrationTest
     assert_template 'timesheets/edit'
     hours = 2
     date_of_service = "2021-01-10"
-    patch timesheet_path(@timesheet), params: { timesheet: { hours:  hours,
-                                                            date_of_service: date_of_service } }
+    patch timesheet_path(@timesheet), params: { timesheet: 
+      { hours:  hours, date_of_service: date_of_service } }
     assert_not flash.empty?
     assert_redirected_to timesheets_path
     @timesheet.reload
-    assert_equal hours,  @timesheet.hours
+    assert_equal hours, @timesheet.hours
     assert_equal date_of_service.to_date, @timesheet.date_of_service
   end
-  
 end

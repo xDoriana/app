@@ -25,9 +25,9 @@
             <% if @employee.has_assoc_timesheets? %>
                     <tr>
                         <th rowspan="<%= @employee.assoc_timesheets_count %>">Associated timesheets</th>
-                        <td>ID <%= @timesheets[0].id %></td>
-                        <td colspan="2">Date: <%= @timesheets[0].date_of_service %></td>
-                        <td><%= link_to "View", timesheet_path(@timesheets[0]), class: "btn btn-light-blue" %></td>
+                        <td>ID <%= @timesheets.first.id %></td>
+                        <td colspan="2">Date: <%= @timesheets.first.date_of_service %></td>
+                        <td><%= link_to "View", timesheet_path(@timesheets.first), class: "btn btn-light-blue" %></td>
                     </tr>
 
                     <% @timesheets.drop(1).each do |t| %>
@@ -50,25 +50,22 @@
                 <th colspan="5" class="text-center">ADDITIONAL INFO</th>
             </tr>
 
-<!-- # CUM FAC SA NU MAI FOLOSESC variabila @first_employee si sa arat in view direct doar distinct/unique employees? -->
             <% if @employee.has_assoc_timesheets? %>
                     <tr>
                         <th rowspan="<%= @employee.assoc_budgets_count %>">Associated budgets</th>
-                        <td>ID <%= @first_budget.id %></td>
-                        <td>Start: <%= @first_budget.start_date %></td>
-                        <td>End: <%= @first_budget.end_date %></td>
-                        <td><%= link_to "View", budget_path(@first_budget), class: "btn btn-light-blue" %></td>
+                        <td>ID <%= @budgets.first.id %></td>
+                        <td>Start: <%= @budgets.first.start_date %></td>
+                        <td>End: <%= @budgets.first.end_date %></td>
+                        <td><%= link_to "View", budget_path(@budgets.first), class: "btn btn-light-blue" %></td>
                     </tr>
 
-                    <% @budgets.each do |b| %>
-                        <% if b.id != @first_budget.id %>
-                            <tr>
-                                <td>ID <%= b.id %></td>
-                                <td>Start: <%= b.start_date %></td>
-                                <td>End: <%= b.end_date %></td>
-                                <td><%= link_to "View", budget_path(b), class: "btn btn-light-blue" %></td>
-                            </tr>
-                        <% end %>
+                    <% @budgets.drop(1).each do |b| %>
+                        <tr>
+                            <td>ID <%= b.id %></td>
+                            <td>Start: <%= b.start_date %></td>
+                            <td>End: <%= b.end_date %></td>
+                            <td><%= link_to "View", budget_path(b), class: "btn btn-light-blue" %></td>
+                        </tr>
                     <% end %>
                 <% else %>
                     <tr>

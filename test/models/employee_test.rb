@@ -20,8 +20,7 @@ class EmployeeTest < ActiveSupport::TestCase
     assert_not @employee.valid?
   end
 
-  ## assoc_timesheets_count
+  # test assoc_timesheets_count
 
-  ## assoc_budgets_count
-  
+  # test assoc_budgets_count
 end

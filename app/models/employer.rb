@@ -4,8 +4,7 @@ class Employer < ApplicationRecord
     has_many :timesheets, through: :employees
     has_many :timesheets, through: :budgets
 
-    validates :first_name, presence: true, length: { maximum: 50 }
-    validates :last_name, presence: true, length: { maximum: 50 }
+    validates :first_name, :last_name, presence: true, length: { maximum: 50 }
 
     def has_assoc_budgets?
         budgets.exists?
@@ -53,8 +52,8 @@ class Employer < ApplicationRecord
     def budgets_total_days
         total_days = 0
         budgets.each do |budget|
-            total_days += (budget.end_date - budget.start_date).to_i
-# nu-s sigura ca chestia asta takes into account DST
+            total_days += (budget.end_date - budget.start_date).to_i + 1
+			# not sure if this takes into account DST
         end
         return total_days
     end
@@ -66,11 +65,6 @@ class Employer < ApplicationRecord
     def assoc_timesheets_count
         if has_assoc_timesheets?
             return timesheets.count
-          end
-        # total_timesheets = 0
-        # budgets.each do |budget|
-        #     total_timesheets += budget.timesheets.count
-        # end
-        # return total_timesheets
+        end
     end
 end

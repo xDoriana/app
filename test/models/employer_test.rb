@@ -3,7 +3,7 @@ require 'test_helper'
 class EmployerTest < ActiveSupport::TestCase
 
   def setup
-    @employer = Employer.new(first_name: "Example", last_name: "User")
+    @employer = employers(:one)
   end
 
   test "should be valid" do
@@ -20,22 +20,35 @@ class EmployerTest < ActiveSupport::TestCase
     assert_not @employer.valid?
   end
 
-  ## assoc_budgets_count
+  # test has_assoc_budgets?
 
-  ## assoc_employees_count
+  # test assoc_budgets_count
 
-  ## total_budgets_hours
+  # test has_assoc_employees?
 
-  ## timesheets_hours_from_budgets_hours
+  # test assoc_employees_count
 
-  ## budgets_hours_usage_rate
+  # test total_budgets_hours
 
-  ## budgets_start_date
+  # test timesheets_hours_from_budgets_hours
 
-  ## budgets_end_date
+  test "#budgets_hours_usage_rate" do
+    assert_equal(18.18, @employer.budgets_hours_usage_rate)
+  end
 
-  ## budgets_total_days
+  test "#budgets_start_date" do
+  date = Date.new(2021, 01, 1)
+    assert_equal(date, @employer.budgets_start_date)
+  end
 
-  ## assoc_timesheets_count
+  test "#budgets_end_date" do
+  date = Date.new(2021, 01, 11)
+    assert_equal(date, @employer.budgets_end_date)
+  end
 
+  test "#budgets_total_days" do
+    assert_equal(20, @employer.budgets_total_days)
+  end
+
+  # test assoc_timesheets_count
 end

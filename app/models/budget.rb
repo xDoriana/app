@@ -11,7 +11,7 @@ class Budget < ApplicationRecord
   validate :associated_timesheets_dates, on: :update
 
   def timesheets_total_hours
-    timesheets.sum(&:hours).to_i
+    timesheets.sum(&:hours)
   end
 
   def hours_usage_rate
@@ -20,16 +20,14 @@ class Budget < ApplicationRecord
 
   def hours_cover_timesheets_hours
     return unless hours
-    # mai trebe sa verific si daca exista timesheets?
 
     if hours < timesheets_total_hours
-      errors.add(:hours, "do not cover existing timesheets")
+      errors.add(:hours, "do not cover existing timesheets' hours. Timesheets hours to cover: #{timesheets_total_hours}")
     end
   end
 
   def start_date_is_before_end_date
     return unless start_date && end_date
-    # sau scriu return unless budget??
     
     if start_date > end_date
       errors.add(:start_date, "must come before or be on the same day as end date")
@@ -38,9 +36,8 @@ class Budget < ApplicationRecord
 
   def has_assoc_timesheets?
     timesheets.exists?
-#   timesheets.any?
-#   Budget.includes(:timesheets).where(timesheets: {budget_id: id}).any?
-# cum as putea face aici pt employees (adica employees.exists? oare?) folosind direct asocierea cu employees? -- ce am vrut sa zic?? oare ca sa folosesc in view metoda asta?
+  # timesheets.any? - tot OK, mai putin optim
+  # Budget.includes(:timesheets).where(timesheets: {budget_id: id}).any?
   end
 
   def assoc_timesheets_count
@@ -51,7 +48,7 @@ class Budget < ApplicationRecord
 
   def assoc_employees_count
     if has_assoc_timesheets?
-      return employees.distinct.count('id')
+      return employees.distinct.count
     end
   end
 
@@ -72,17 +69,12 @@ class Budget < ApplicationRecord
 
   def associated_timesheets_dates
     if has_assoc_timesheets? && oldest_timesheet < start_date
-      errors.add(:start_date, "does not cover timesheet dates")
+      errors.add(:start_date, "does not cover timesheets' dates range. Range to cover: #{oldest_timesheet} - #{most_recent_timesheet}")
     end
 
     if has_assoc_timesheets? && most_recent_timesheet > end_date
-      errors.add(:end_date, "does not cover timesheet dates")
+      errors.add(:end_date, "does not cover timesheets' dates range. Range to cover: #{oldest_timesheet} - #{most_recent_timesheet}")
     end
   end
 
-  # ce se intampla cu validarea asta daca nu am asociate timesheets??? ce imi returneaza?
-  
-# si de ce nu merge cu metodele oldest_timesheet si most_recent_timesheet??? -- nuj ce ii cu chestia asta, oare e obsolete?
-#   if has_assoc_timesheets? && oldest_timesheet > start_date
-#   if has_assoc_timesheets? && most_recent_timesheet < end_date
 end

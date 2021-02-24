@@ -1,8 +1,8 @@
 require 'test_helper'
 
 class TimesheetsShowTest < ActionDispatch::IntegrationTest
-    include ApplicationHelper
-# aici am metoda full title
+  include ApplicationHelper
+  # aici am metoda full_title
 
   def setup
     @user = users(:jane)
@@ -13,6 +13,7 @@ class TimesheetsShowTest < ActionDispatch::IntegrationTest
     get timesheet_path(@timesheet)
     assert_redirected_to login_path
     follow_redirect!
+    assert_not flash.empty?
     get users_path
     assert_template 'users/index'
   end
@@ -21,14 +22,8 @@ class TimesheetsShowTest < ActionDispatch::IntegrationTest
     log_in_as(@user)
     get timesheet_path(@timesheet)
     assert_template 'timesheets/show'
-    assert_select 'title', full_title("Timesheet")
-    assert_select 'h1', text: "Timesheet"
-    assert_select 'h3', text: "ID"
-    assert_select 'h3', text: "Associated employee"
-    assert_select 'h3', text: "Associated budget"
-    assert_select 'h3', text: "Associated employer"
-    assert_select 'h3', text: "Hours"
-    assert_select 'h3', text: "Date of service"
+    assert_select 'title', full_title("Timesheet " + @timesheet.id.to_s)
+    assert_select 'h1', text: "Timesheet " + @timesheet.id.to_s
     # Edit timesheet button
     assert_select 'a[href=?]', edit_timesheet_path(@timesheet), text: 'Edit'
     # Delete timesheet button
@@ -37,5 +32,4 @@ class TimesheetsShowTest < ActionDispatch::IntegrationTest
       delete timesheet_path(@timesheet)
     end
   end 
-
 end

@@ -16,10 +16,10 @@ class ActiveSupport::TestCase
     !session[:user_id].nil?
   end
 
-  # Log in as a particular user.
-  def log_in_as(user)
-    session[:user_id] = user.id
-  end
+  # Log in as a user remembered in session.
+  # def log_in_as(user)
+  #   session[:user_id] = user.id
+  # end
   
   class ActionDispatch::IntegrationTest
 
@@ -29,7 +29,6 @@ class ActiveSupport::TestCase
                                             password: password,
                                             remember_me: remember_me } }
     end
-# imi trebe chestia asta specifica????
 
   end
 end

@@ -13,12 +13,10 @@ class UsersProfileTest < ActionDispatch::IntegrationTest
     assert_template 'users/show'
     assert_select 'title', full_title("Profile")
     assert_select 'h1', text: "User"
-    assert_select 'h3', text: "Name"
-    assert_select 'h3', text: "E-mail"
-    assert_select 'a[href=?]', user_path(@user), text: 'Delete user', method: :delete
+    assert_select 'a[href=?]', edit_user_path(@user), text: 'Edit'
+    assert_select 'a[href=?]', user_path(@user), text: 'Delete', method: :delete
     assert_difference 'User.count', -1 do
         delete user_path(@user)
     end
   end
-  
 end

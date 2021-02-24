@@ -50,7 +50,7 @@ class EmployersController < ApplicationController
     
 
     private
-        def employer_params
-            params.require(:employer).permit(:first_name, :last_name)
-        end
+    def employer_params
+        params.require(:employer).permit(:first_name, :last_name)
+    end
 end

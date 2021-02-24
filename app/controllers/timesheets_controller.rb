@@ -62,6 +62,7 @@ class TimesheetsController < ApplicationController
 
     
     private
+    
     def timesheet_params
         params.require(:timesheet).permit(:employee_id, :budget_id, :hours, :date_of_service)
     end

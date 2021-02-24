@@ -1,7 +1,7 @@
 require 'test_helper'
 
 class EmployersNewTest < ActionDispatch::IntegrationTest
-    include ApplicationHelper
+  include ApplicationHelper
 
   def setup
     @user = users(:jane)
@@ -11,6 +11,7 @@ class EmployersNewTest < ActionDispatch::IntegrationTest
     get new_employer_path
     assert_redirected_to login_path
     follow_redirect!
+    assert_not flash.empty?
     get users_path
     assert_template 'users/index'
   end
@@ -20,6 +21,7 @@ class EmployersNewTest < ActionDispatch::IntegrationTest
     get new_employer_path
     assert_template 'employers/new'
     assert_select 'title', full_title("Add Employer")
+    assert_select 'h1', text: "Add a new Employer"
   end
 
   test "invalid form information" do
@@ -42,5 +44,4 @@ class EmployersNewTest < ActionDispatch::IntegrationTest
     assert_not flash.empty?
     assert_template 'employers/index'
   end
-
 end

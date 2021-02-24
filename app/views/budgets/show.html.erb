@@ -9,7 +9,7 @@
 <div class="table-responsive">
     <table class="table table-striped table-hover">
         <tbody>
-            <tr >
+            <tr>
                 <th>Employer</th>
                 <td>ID <%= @employer.id %></td>
                 <td><%= @employer.first_name %> <%= @employer.last_name %></td>
@@ -31,9 +31,9 @@
             <% if @budget.has_assoc_timesheets? %>
                     <tr>
                         <th rowspan="<%= @budget.assoc_timesheets_count %>">Associated timesheets</th>
-                        <td>ID <%= @timesheets[0].id %></td>
-                        <td>Date: <%= @timesheets[0].date_of_service %></td>
-                        <td><%= link_to "View", timesheet_path(@timesheets[0]), class: "btn btn-light-blue" %></td>
+                        <td>ID <%= @timesheets.first.id %></td>
+                        <td>Date: <%= @timesheets.first.date_of_service %></td>
+                        <td><%= link_to "View", timesheet_path(@timesheets.first), class: "btn btn-light-blue" %></td>
                     </tr>
 
                     <% @timesheets.drop(1).each do |t| %>
@@ -84,24 +84,20 @@
                 <% end %>
             </tr>
 
-            
-<!-- # CUM FAC SA NU MAI FOLOSESC variabila @first_employee si sa arat in view direct doar distinct/unique employees? -->
             <% if @budget.has_assoc_timesheets? %>
                     <tr>
                         <th rowspan="<%= @budget.assoc_employees_count %>">Associated employees</th>
-                        <td>ID <%= @first_employee.id %></td>
-                        <td><%= @first_employee.first_name %> <%= @first_employee.last_name %></td>
-                        <td><%= link_to "View", employee_path(@first_employee), class: "btn btn-light-blue" %></td>
+                        <td>ID <%= @employees.first.id %></td>
+                        <td><%= @employees.first.first_name %> <%= @employees.first.last_name %></td>
+                        <td><%= link_to "View", employee_path(@employees.first), class: "btn btn-light-blue" %></td>
                     </tr>
 
-                    <% @employees.each do |e| %>
-                        <% if e.id != @first_employee.id %>
-                            <tr>
-                                <td>ID <%= e.id %></td>
-                                <td><%= e.first_name %> <%= e.last_name %></td>
-                                <td><%= link_to "View", employee_path(e), class: "btn btn-light-blue" %></td>
-                            </tr>
-                        <% end %>
+                    <% @employees.drop(1).each do |e| %>
+                        <tr>
+                            <td>ID <%= e.id %></td>
+                            <td><%= e.first_name %> <%= e.last_name %></td>
+                            <td><%= link_to "View", employee_path(e), class: "btn btn-light-blue" %></td>
+                        </tr>
                     <% end %>
                 <% else %>
                     <tr>

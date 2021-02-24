@@ -1,8 +1,7 @@
 require 'test_helper'
 
 class BudgetsShowTest < ActionDispatch::IntegrationTest
-    include ApplicationHelper
-# aici am metoda full title
+  include ApplicationHelper
 
   def setup
     @user = users(:jane)
@@ -13,6 +12,7 @@ class BudgetsShowTest < ActionDispatch::IntegrationTest
     get budget_path(@budget)
     assert_redirected_to login_path
     follow_redirect!
+    assert_not flash.empty?
     get users_path
     assert_template 'users/index'
   end
@@ -21,12 +21,8 @@ class BudgetsShowTest < ActionDispatch::IntegrationTest
     log_in_as(@user)
     get budget_path(@budget)
     assert_template 'budgets/show'
-    assert_select 'title', full_title("Budget")
-    assert_select 'h1', text: "Budget"
-    assert_select 'h3', text: "ID"
-    assert_select 'h3', text: "Employer"
-    assert_select 'h3', text: "Associated timesheets"
-    assert_select 'h3', text: "Start and end dates"
+    assert_select 'title', full_title("Budget " + @budget.id.to_s)
+    assert_select 'h1', text: "Budget " + @budget.id.to_s
     # Edit budget button
     assert_select 'a[href=?]', edit_budget_path(@budget), text: 'Edit'
     # Delete budget button
@@ -35,5 +31,4 @@ class BudgetsShowTest < ActionDispatch::IntegrationTest
       delete budget_path(@budget)
     end
   end 
-
 end

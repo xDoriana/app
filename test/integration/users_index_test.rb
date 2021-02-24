@@ -1,12 +1,13 @@
 require 'test_helper'
 
 class UsersIndexTest < ActionDispatch::IntegrationTest
+  include ApplicationHelper
 
   def setup
     @user = users(:jane)
   end
 
-  test "index as logged-out user including login link" do
+  test "index as logged-out user" do
     get users_path
     assert_template 'users/index'
     assert_select 'a[href=?]', login_path, text: 'Log in', count: 2
@@ -16,8 +17,7 @@ class UsersIndexTest < ActionDispatch::IntegrationTest
     log_in_as(@user)
     get users_path
     assert_template 'users/index'
+    assert_select 'title', full_title("Home")
+    assert_select 'h1', text: "Welcome to the Timesheet App"
   end
-
-# unde pun testarea pt meniul ce imi apare daca esti sau nu logged-in? la users index test sau la site layout test? momentan e la site layout test
-  
 end

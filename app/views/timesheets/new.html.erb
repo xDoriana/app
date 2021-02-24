@@ -12,13 +12,12 @@
             <%= render 'shared/error_messages', object: f.object %>
             
             <%= f.label :employee_id %>
-            <%= f.select :employee_id, Employee.all.collect { |x| [x.first_name, x.last_name, x.id]}, {:include_blank => 'Select One'}, required: true, class: 'form-control' %>
+            <%= f.select :employee_id, Employee.all.collect { |e| ["ID #{e.id}, #{e.first_name} #{e.last_name} - Employer #{e.employer_id}", e.id]}, {:include_blank => 'Select One'}, required: true, class: 'form-control' %>
 
             <%= f.label :budget_id %>
-            <%= f.select :budget_id, Budget.all.collect { |x| [x.id]}, {:include_blank => 'Select One'}, required: true, class: 'form-control' %>
+            <%= f.select :budget_id, Budget.all.collect { |b| ["ID #{b.id}, (#{b.start_date} - #{b.end_date}) - Employer #{b.employer_id}", b.id]}, {:include_blank => 'Select One'}, required: true, class: 'form-control' %>
 
             <%= f.label :hours %>
-<!-- # de ce daca scot required: true nu imi da eroare ca trebe sa fie prezenta???  -->
             <%= f.number_field :hours, required: true, class: 'form-control' %>
 
             <%= f.label :date_of_service %>
