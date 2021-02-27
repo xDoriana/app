@@ -1,7 +1,11 @@
 <header class="navbar navbar-fixed-top navbar-inverse">
   <div class="container">
+    <%= link_to root_path, id: "logo" do %>
+      <span class="glyphicon glyphicon-time"></span>
+    <% end %>
 
-    <!-- markup for a hamburger menu -->
+    <nav>
+      <!-- markup for a hamburger menu -->
       <div class="navbar-header">
         <button type="button" class="navbar-toggle collapsed"
                 data-toggle="collapse"
@@ -46,7 +50,7 @@
             <li><%= link_to "Log in", login_path %></li>
           </ul>
         <% end %>
-      </ul>
+      </div>
     </nav>
   </div>
 </header>
